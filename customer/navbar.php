@@ -40,7 +40,9 @@ require_once "link.php";
         <div class="user">
             <a href=""><i class="fa-solid fa-user"></i></a>
         </div>
-            
+        <div class="cart">
+            <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
     </div>
 </nav>
 <script src="./js/nabar.js"></script>

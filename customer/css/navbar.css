@@ -9,6 +9,8 @@
     text-decoration: none;
     color: white;
     font-family: "Inter", serif;
+    scroll-behavior: smooth;
+
 }
 .nav_bar{
     display: flex;
@@ -16,6 +18,9 @@
     align-items: center;
     background-color: black;
     height: 80px;
+    top: 0;
+    position: sticky;
+    z-index: 90;
 }
 .drop_down{
     display: none;
@@ -75,6 +80,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.4s ease;
+    z-index: 90;
 }
 .nav_bar.showInput .searchBox .input_box{
     opacity: 1;
@@ -109,6 +115,16 @@
 
 .user{
     margin-left: 20px;
+}
+.cart{
+    margin-left: 20px;
+    padding: 10px;
+    width: 50px;
+    border: 2px solid white;
+    border-radius: 50px;
+}
+.cart a{
+    margin-left: 4px;
 }
 .toogle_btn{
     display: none;
