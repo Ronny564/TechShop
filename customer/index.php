@@ -22,35 +22,26 @@ require_once "link.php";
             Improve your gaming<br />
             experience
           </h2>
-          <div class="card_rgb">
-            <a href="#" class="button">Shop Now</a>
-          </div>
         </div>
       </div>
       <div class="slide swiper-slide">
-        <img class="image" src="" alt="">
+        <img class="image" src="./img/razer-viper-v3-pro-sentinels-edition-hero-desktop.webp" alt="">
         <div class="image-data">
         <span class="text">use the finest product</span>
           <h2>
             Improve your gaming<br />
             experience
           </h2>
-          <div class="card_rgb">
-            <a href="#" class="button">Shop Now</a>
-          </div>
         </div>
       </div>
       <div class="slide swiper-slide">
-        <img class="image" src="" alt="">
+        <img class="image" src="./img/home-featured-overwatch-lg.webp" alt="">
         <div class="image-data">
         <span class="text">use the finest product</span>
           <h2>
             Improve your gaming<br />
             experience
           </h2>
-          <div class="card_rgb">
-            <a href="#" class="button">Shop Now</a>
-          </div>
         </div>
       </div>
     </div>
@@ -58,7 +49,11 @@ require_once "link.php";
     <div class="swiper-button-prev"></div>
     <div class="swiper-pagination"></div>
   </div>
-    
+  <div class="category">
+    <h2>Product by Category</h2>
+
+  </div>
+
     
 </body>
 </html>
