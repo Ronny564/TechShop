@@ -40,8 +40,8 @@ require_once "link.php";
         <div class="user">
             <a href=""><i class="fa-solid fa-user"></i></a>
         </div>
-        <div class="cart">
-            <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+        <div class="cart ml-5 w-12 h-8 rounded-full border-2 border-white flex justify-center items-center pr-1">
+            <a href="" class=""><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
     </div>
 </nav>

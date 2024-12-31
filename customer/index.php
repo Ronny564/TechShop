@@ -25,7 +25,7 @@ require_once "link.php";
         </div>
       </div>
       <div class="slide swiper-slide">
-        <img class="image" src="./img/razer-viper-v3-pro-sentinels-edition-hero-desktop.webp" alt="">
+        <img class="image" src="./img/gaming-keyboards-l19fzyb1tjprgevk.jpg" alt="">
         <div class="image-data">
         <span class="text">use the finest product</span>
           <h2>

@@ -112,19 +112,8 @@
     font-size: 16px;
     color: black;
 }
-
 .user{
     margin-left: 20px;
-}
-.cart{
-    margin-left: 20px;
-    padding: 10px;
-    width: 50px;
-    border: 2px solid white;
-    border-radius: 50px;
-}
-.cart a{
-    margin-left: 4px;
 }
 .toogle_btn{
     display: none;
@@ -152,7 +141,6 @@
 .dropdown_menu li:hover{
     color: black;
 }
-
 @media (max-width: 720px) {
     .nav_logo{
         font-size: 23px;
