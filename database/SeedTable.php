@@ -49,20 +49,31 @@ function seedProducts($pdo,$products)
 //         }
 //     }
 // }
-seedProducts($pdo,$products);
+
     
 // seedCustomers($pdo, $users);
 
 
-// function seedAdmin($pdo,$admin)
-// {
-//     foreach($admin as $ad)
-//     {
-//         $id=$ad["id"];
-//         $name=$ad["name"];
-//         $email=$ad["email"];
-//         $password=$ad["password"];
-//         $img_url=$ad["img_url"];
 
-//     }
-// }
+function seedAdmin($pdo,$admins)
+{
+    foreach($admins as $admin)
+    {
+        $id=$admin["id"];
+        $name=$admin["name"];
+        $email=$admin["email"];
+        $password=$admin["password"];
+        $img_url=$admin["img_url"];
+        $query="INSERT IGNORE INTO admin VALUES
+        ('$id','$name','$email','$password','$img_url')";
+         try{
+            $pdo->query($query);
+            
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    echo "admin data successfully added";
+}
+seedAdmin($pdo,$admins);
+seedProducts($pdo,$products);

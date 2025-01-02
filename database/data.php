@@ -36,4 +36,28 @@ $products=[
     ]
 ];
 
+$admins=[
+    [
+        "id"=>1,
+        "name"=>"Lin",
+        "email"=>"lin@gmail.com",
+        "password"=>'123',
+        "img_url"=>""
+    ],
+    [
+        "id"=>2,
+        "name"=>"Myat",
+        "email"=>'myat@gmail.com',     
+        "password"=>'456',
+        "img_url"=>""
+    ],
+    [
+        "id"=>3,
+        "name"=>"Thu",
+        "email"=>'thu@gmail.com',     
+        "password"=>'789',
+        "img_url"=>""
+    ]
+];
+
 

@@ -115,6 +115,7 @@
 .user{
     margin-left: 20px;
 }
+
 .toogle_btn{
     display: none;
     cursor: pointer;
@@ -141,12 +142,49 @@
 .dropdown_menu li:hover{
     color: black;
 }
+.logout{
+    position: relative;
+}
+.drop_down{
+    display: none;
+}
+.logout:hover .drop_down{
+    display: block;
+    position: absolute;
+    background-color: gray;
+    left: 0;
+    top: 100%;
+    border-radius: 4px;
+}
+.logout:hover .drop_down ul {
+    margin: 10px;
+}
+.logout:hover .drop_down ul li{
+    width: 150px;
+    padding: 10px;
+}
+.logout:hover .drop_down ul li :hover{
+   color: black;
+}
+.drop_down ul li button{
+    color: black;
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    border: 2px solid black;
+}
+.drop_down ul li button:hover{
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    transition: 0.4s;
+    
+}
+
 @media (max-width: 720px) {
     .nav_logo{
         font-size: 23px;
-    }
-    .drop_down{
-        display: block;
     }
     .nav_links{
         display: none;

@@ -1,5 +1,20 @@
 <?php
+session_start();
 require_once "link.php";
+if(isset($_SESSION['user']))
+{
+    $user =$_SESSION['user'];
+};
+function logout()
+{
+    if(isset($_SESSION["user"]))
+    {
+        unset($_SESSION["user"]);
+    }
+}
+if($_SERVER['REQUEST_METHOD'] === "POST"){
+    logout();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,9 +52,26 @@ require_once "link.php";
                 <input type="text" placeholder="Search...">
             </div>
         </div>
-        <div class="user">
-            <a href=""><i class="fa-solid fa-user"></i></a>
+       
+        <?php if(isset($_SESSION['user'])){?>
+        <form method="POST">
+            <div class="logout">
+            <a href=""><?=$_SESSION['user']['name']?><i class="fa-solid fa-caret-down ml-2"></i></a>
+                <div class="drop_down">
+                    <ul>
+                        <li><a href="">Profile</a></li>
+                        <li><a href="">Setting</a></li>
+                        <li><button>Log Out</button></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <?php }else{?>
+            <div class="user">
+            <a href="login.php"><i class="fa-solid fa-user"></i></a>
         </div>
+        <?php } ?>
+        
         <div class="cart ml-5 w-12 h-8 rounded-full border-2 border-white flex justify-center items-center pr-1">
             <a href="" class=""><i class="fa-solid fa-cart-shopping"></i></a>
         </div>

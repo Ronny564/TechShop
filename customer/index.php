@@ -1,6 +1,9 @@
 <?php
 require_once "navbar.php";
 require_once "link.php";
+require_once "data.php";
+$products=getProduct($pdo);
+// print_r($product);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +20,8 @@ require_once "link.php";
       <div class="slide swiper-slide">
         <img class="image" src="./img/G515_Cinderella_Product_Key_Visual_16x9-D.jpg" alt="">
         <div class="image-data">
-        <span class="text">use the finest product</span>
+        <span class="text">
+          use the finest product</span>
           <h2>
             Improve your gaming<br />
             experience
@@ -49,10 +53,7 @@ require_once "link.php";
     <div class="swiper-button-prev"></div>
     <div class="swiper-pagination"></div>
   </div>
-  <div class="category">
-    <h2>Product by Category</h2>
-
-  </div>
+  <h2 class="cat_head">Product by Category</h2>
 
     
 </body>

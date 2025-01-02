@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -85,20 +86,40 @@ body{
 .swiper-pagination{
     display: none;
 }
-.category{
+.cat_head{
     text-align: center;
     font-size: 25px;
-    font-weight: 700;
-    color: black;
-    margin-top: 20px;
+    font-weight: 600;
+    margin: 20px 0;
 }
 
+.cat_text a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    background-color: rgba(128, 128, 128, 0.71);
+    border-radius: 5px;
+    border: 2px solid black;
+}
+.cat_text a:hover{
+    background-color: black;
+    color: white;
+    letter-spacing: 4px;
+    width: 150px;
+    transition: 0.5s;
+}
 
-@media (max-width:720px) {
+  @media (max-width:720px) {
     .swiper-button-next, .swiper-button-prev{
         display: none;
     }
     .swiper-pagination{
         display: block;
     }
+    #category{
+        flex-direction: column;
+    }
+
 }
