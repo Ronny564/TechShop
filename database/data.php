@@ -9,18 +9,18 @@ $products=[
         "color"=>"Black",
         "category"=>"Mouse",
         "brand"=>"Logitech",
-        "spec"=>"Logitech",
+        "detail"=>"Logitech",
         "img_url"=>""
     ],
     [
         "id"=>2,
-        "name"=>"Razer Viper V3",
+        "name"=>"ARTIS PRO WIRELESS BLACK",
         "stock"=> 10,
         "price"=>50,
         "color"=>"Black",
-        "category"=>"Mouse",
-        "brand"=>"Razer",
-        "spec"=>"Razer",
+        "category"=>"HeadPhone",
+        "brand"=>"Steelseries",
+        "detail"=>"Steelseries",
         "img_url"=>""
     ],
     [
@@ -31,7 +31,40 @@ $products=[
         "color"=>"Black",
         "category"=>"Keyboard",
         "brand"=>"Razer",
-        "spec"=>"Razer",
+        "detail"=>"Razer",
+        "img_url"=>""
+    ],
+    [
+        "id"=>4,
+        "name"=>"Logitech G Pro",
+        "stock"=> 10,
+        "price"=>50,
+        "color"=>"White",
+        "category"=>"Mouse",
+        "brand"=>"Logitech",
+        "detail"=>"Logitech",
+        "img_url"=>""
+    ],
+    [
+        "id"=>5,
+        "name"=>"ARTIS PRO WIRELESS BLACK",
+        "stock"=> 10,
+        "price"=>50,
+        "color"=>"White",
+        "category"=>"HeadPhone",
+        "brand"=>"Steelseries",
+        "detail"=>"Steelseries",
+        "img_url"=>""
+    ],
+    [
+        "id"=>6,
+        "name"=>"Razer Blackwidow V4",
+        "stock"=> 10,
+        "price"=>50,
+        "color"=>"White",
+        "category"=>"Keyboard",
+        "brand"=>"Razer",
+        "detail"=>"Razer",
         "img_url"=>""
     ]
 ];
@@ -42,21 +75,38 @@ $admins=[
         "name"=>"Lin",
         "email"=>"lin@gmail.com",
         "password"=>'123',
-        "img_url"=>""
     ],
     [
         "id"=>2,
         "name"=>"Myat",
         "email"=>'myat@gmail.com',     
         "password"=>'456',
-        "img_url"=>""
     ],
     [
         "id"=>3,
         "name"=>"Thu",
         "email"=>'thu@gmail.com',     
         "password"=>'789',
-        "img_url"=>""
+    ]
+];
+$customers=[
+    [
+        "id"=>10,
+        "name"=>"Ingyin",
+        "email"=>"lin@gmail.com",
+        "password"=>'123',
+    ],
+    [
+        "id"=>20,
+        "name"=>"Thwe",
+        "email"=>'myat@gmail.com',     
+        "password"=>'456',
+    ],
+    [
+        "id"=>30,
+        "name"=>"Wai",
+        "email"=>'thu@gmail.com',     
+        "password"=>'789',
     ]
 ];
 

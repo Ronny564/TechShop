@@ -9,7 +9,7 @@ function createProductTable($pdo){
     color VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     brand VARCHAR(255) NOT NULL,
-    specification VARCHAR(500),
+    details TEXT,
     img_url TEXT
     )";
     try{
@@ -22,34 +22,42 @@ function createProductTable($pdo){
 }
 function createAdminTable($pdo){
     $query= "Create table if not exists admin
-    (id INT PRIMARY KEY AUTO_INCREMENT,
+    (AdminId INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    img_url TEXT
+    password TEXT NOT NULL
     )";
     try{
         $pdo->query($query);
-        echo"users table created<br>";
+        echo"admin table created<br>";
     }
     catch(PDOException $e){
          echo $e->getMessage();}
 }
-// function createCustomerTable(PDO $pdo){
-//     $query= "Create table if not exists customers
-//     (id INT PRIMARY KEY AUTO_INCREMENT,
-//     name VARCHAR(50) NOT NULL,
-//     email TEXT NOT NULL UNIQUE,
-//     password TEXT NOT NULL
-//     )";
-//     try{
-//         $pdo->exec($query);
-//         echo"customers table created<br>";
-//       }
-//     catch(PDOException $e){
-//          echo $e->getMessage();}
+function createCustomerTable(PDO $pdo){
+    $query= "Create table if not exists customers
+    (CusId INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+    )";
+    try{
+        $pdo->exec($query);
+        echo"customers table created<br>";
+      }
+    catch(PDOException $e){
+         echo $e->getMessage();}
     
+}
+// function createOrderTable()
+// {
+//     $query= "CREATE TABLE IF NOT EXISTS order
+//     (OrderId INT AUTO INCREMENT,
+//     PRIMARY KEY (OrderId),
+//     FOREIGN KEY (CusID) REFERENCES customers(CusID),
+//     FOREIGN KEY (id) REFERENCES products(id)
+//     )";
 // }
 createProductTable($pdo);
 createAdminTable($pdo);
-// createCustomerTable($pdo);
+createCustomerTable($pdo);

@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD']==='POST')
 }
 function login($pdo,$email,$password)
 {
-    $sql = "SELECT * FROM admin WHERE email=:email AND password=:password";
+    $sql = "SELECT * FROM customers WHERE email=:email AND password=:password";
     try{
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":email",$email);
@@ -36,6 +36,4 @@ if($result){
 else{
     header("Location: /TechShop/customer/login.php?login=failed");
 }
-
-
 ?>

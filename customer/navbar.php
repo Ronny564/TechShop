@@ -31,8 +31,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         <i class="fa-solid fa-bars"></i>
     </div>
     <div class="dropdown_menu">
-        <a href=""><li>Home</li></a>
-        <a href=""><li>Products</li></a>
+        <a href="index.php"><li>Home</li></a>
+        <a href="product.php"><li>Products</li></a>
         <a href=""><li>Contact</li></a>
         <a href=""><li>About us</li></a>  
     </div>
@@ -40,18 +40,18 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         <a href="#home">Tech Shop</a>
     </div>
     <div class="nav_links">
-        <a href=""><li>Home</li></a>
-        <a href=""><li>Products</li></a>
+        <a href="index.php"><li>Home</li></a>
+        <a href="product.php"><li>Products</li></a>
         <a href=""><li>Contact</li></a>
         <a href=""><li>About us</li></a>
     </div>
     <div class="nav_right">
-        <div class="searchBox">
+        <!-- <div class="searchBox">
             <i class="fa-solid fa-magnifying-glass"></i>
             <div class="input_box">
                 <input type="text" placeholder="Search...">
             </div>
-        </div>
+        </div> -->
        
         <?php if(isset($_SESSION['user'])){?>
         <form method="POST">
@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             <a href=""><?=$_SESSION['user']['name']?><i class="fa-solid fa-caret-down ml-2"></i></a>
                 <div class="drop_down">
                     <ul>
-                        <li><a href="">Profile</a></li>
+                        <li><a href="profiledetail.php">Profile</a></li>
                         <li><a href="">Setting</a></li>
                         <li><button>Log Out</button></li>
                     </ul>

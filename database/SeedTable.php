@@ -1,6 +1,6 @@
 <?php
 require_once "PDO.php";
-require_once"data.php";
+require_once "data.php";
 
 function seedProducts($pdo,$products)
 {
@@ -13,11 +13,11 @@ function seedProducts($pdo,$products)
         $color =$product["color"];
         $category=$product["category"];
         $brand=$product["brand"];
-        $specification=$product["spec"];
+        $detail=$product["detail"];
         $img_url=$product["img_url"];
         $query= "INSERT IGNORE INTO products VALUES
         (
-            '$id','$name','$stock','$price','$color','$category','$brand','$specification','$img_url' 
+            '$id','$name','$stock','$price','$color','$category','$brand','$detail','$img_url' 
         )";
         try{
             $pdo->query($query);
@@ -26,32 +26,33 @@ function seedProducts($pdo,$products)
             echo $e->getMessage();
         }
     }
-    echo "product data successfully added";
+    echo "product data successfully added<br>";
 }
 
 
-// function seedCustomers($pdo,$users)
-// {
-//     foreach($users as $user)
-//     {
-//         $id= $user["id"];
-//         $name= $user["name"];
-//         $email= $user["email"];
-//         $password=$user["password"];
-//         $query= "INSERT IGNORE INTO users VALUES
-//         (
-//             '$id','$name','$email','$password' 
-//         )";
-//         try{
-//             $pdo->query($query);
-//         }catch(Exception $e){
-//             echo $e->getMessage();
-//         }
-//     }
-// }
+function seedCustomers($pdo,$customers)
+{
+    foreach($customers as $customer)
+    {
+        $id= $customer["id"];
+        $name= $customer["name"];
+        $email= $customer["email"];
+        $password=$customer["password"];
+        $query= "INSERT IGNORE INTO customers VALUES
+        (
+            '$id','$name','$email','$password' 
+        )";
+        try{
+            $pdo->query($query);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    echo "customer data successfully added<br> ";
+}
 
     
-// seedCustomers($pdo, $users);
+
 
 
 
@@ -63,9 +64,8 @@ function seedAdmin($pdo,$admins)
         $name=$admin["name"];
         $email=$admin["email"];
         $password=$admin["password"];
-        $img_url=$admin["img_url"];
         $query="INSERT IGNORE INTO admin VALUES
-        ('$id','$name','$email','$password','$img_url')";
+        ('$id','$name','$email','$password')";
          try{
             $pdo->query($query);
             
@@ -73,7 +73,8 @@ function seedAdmin($pdo,$admins)
             echo $e->getMessage();
         }
     }
-    echo "admin data successfully added";
+    echo "admin data successfully added<br>";
 }
+seedCustomers($pdo, $customers);
 seedAdmin($pdo,$admins);
 seedProducts($pdo,$products);
