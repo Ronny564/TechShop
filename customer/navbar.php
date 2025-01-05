@@ -1,6 +1,20 @@
 <?php
-session_start();
 require_once "link.php";
+
+if(!isset($_SESSION)){
+    session_start();
+}
+  $qty=0;
+  if(isset($_SESSION['cart']))
+  {
+    foreach($_SESSION['cart'] as $record)
+    {
+      // print_r($record);echo "<br>";
+      $qty += $record['qty'];
+    }
+  }
+
+
 if(isset($_SESSION['user']))
 {
     $user =$_SESSION['user'];
@@ -15,6 +29,7 @@ function logout()
 if($_SERVER['REQUEST_METHOD'] === "POST"){
     logout();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,8 +87,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         </div>
         <?php } ?>
         
-        <div class="cart ml-5 w-12 h-8 rounded-full border-2 border-white flex justify-center items-center pr-1">
-            <a href="" class=""><i class="fa-solid fa-cart-shopping"></i></a>
+        <div class="cart ml-6 w-14 h-8 rounded-full border-2 border-white flex justify-center items-center pr-1">
+            <a href="" class=""><i class="fa-solid fa-cart-shopping"><sub class="pl-1"><?= $qty?></sub></i></a>
         </div>
     </div>
 </nav>

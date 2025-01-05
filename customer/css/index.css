@@ -202,11 +202,11 @@
     color: white;
     text-align: center;
     background-color: black;
+    border: 2px solid black;
     transition: 0.5s;
 }
 .chair_pro a:hover{
     background-color: rgba(128, 128, 128, 0.271);
-    border: 2px solid black;
     color: black;
 }
 .category .cat_head{
