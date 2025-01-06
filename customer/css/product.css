@@ -7,7 +7,6 @@
     color: white;
     font-family: "Inter", serif;
     scroll-behavior: smooth;
-
 }
 body{
     height: 3000px;
@@ -33,20 +32,7 @@ body{
     height: 500px;
     object-fit: cover;
 }
-.search_box{
-    margin: 20px;
-    position: absolute;
-}
-.search_box button{
-    padding: 9px;
-    border-radius: 4px;
-    position: absolute;
-    background-color: black;
-}
-.search_box input{
-    width: 200px;
-    border-radius: 4px;
-}
+
 
 
 

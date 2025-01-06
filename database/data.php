@@ -94,18 +94,21 @@ $customers=[
         "id"=>10,
         "name"=>"Ingyin",
         "email"=>"lin@gmail.com",
+        "address"=>"Yangon",
         "password"=>'123',
     ],
     [
         "id"=>20,
         "name"=>"Thwe",
-        "email"=>'myat@gmail.com',     
+        "email"=>'myat@gmail.com',
+        "address"=>"Yangon",     
         "password"=>'456',
     ],
     [
         "id"=>30,
         "name"=>"Wai",
-        "email"=>'thu@gmail.com',     
+        "email"=>'thu@gmail.com',
+        "address"=>"Yangon",     
         "password"=>'789',
     ]
 ];

@@ -32,7 +32,6 @@ if(isset($_POST['id']))
     {
         print_r($record);  
     }
-
     if(isset($_POST['add'])){
         header("Location: productoverview.php?id=$id");
     }

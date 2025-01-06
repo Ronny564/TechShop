@@ -39,6 +39,7 @@ function createCustomerTable(PDO $pdo){
     (CusId INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     email TEXT NOT NULL UNIQUE,
+    address TEXT NOT NULL,
     password TEXT NOT NULL
     )";
     try{

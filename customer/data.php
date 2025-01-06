@@ -55,3 +55,4 @@ function getProductsbyID($pdo,$id)
         echo $e->getMessage();
     }
 }
+

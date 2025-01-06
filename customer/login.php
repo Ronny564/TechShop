@@ -16,16 +16,19 @@ require_once "link.php";
     <section class="wrapper">
           <div class="form signup">
             <header>Signup</header>
-            <form action="#">
-              <input type="text" placeholder="Full name" required />
-              <input type="text" placeholder="Email address" required />
-              <input type="password" placeholder="Password" required />
-              <div class="checkbox">
-                <input type="checkbox" id="signupCheck" />
-                <label for="signupCheck">I accept all terms & conditions</label>
-              </div>
+            <form action="checksignup.php" method="POST">
+              <input type="text" name="name" placeholder="Full name" required />
+              <input type="text" name="email" placeholder="Email address" required />
+              <input type="text" name="address" placeholder="Address" required />
+              <input type="password" name="password" placeholder="Password" required />
               <input type="submit" value="Signup" />
             </form>
+            <?php if(isset($_GET["signup"])&& $_GET['signup']=='success'): ?>
+            <p class="text-green-600 text-l font-bold">Successfully Signup.Login again</p>
+            <?php endif ?>
+            <?php if(isset($_GET["signup"])&& $_GET['signup']=='failed'): ?>
+            <p class="text-red-600 text-l font-bold">Sign up failed</p>
+            <?php endif ?>
           </div>
 
           <div class="form login">

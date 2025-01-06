@@ -37,10 +37,11 @@ function seedCustomers($pdo,$customers)
         $id= $customer["id"];
         $name= $customer["name"];
         $email= $customer["email"];
+        $address=$customer["address"];
         $password=$customer["password"];
         $query= "INSERT IGNORE INTO customers VALUES
         (
-            '$id','$name','$email','$password' 
+            '$id','$name','$email','$address','$password'
         )";
         try{
             $pdo->query($query);

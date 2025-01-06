@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         <?php } ?>
         
         <div class="cart ml-6 w-14 h-8 rounded-full border-2 border-white flex justify-center items-center pr-1">
-            <a href="" class=""><i class="fa-solid fa-cart-shopping"><sub class="pl-1"><?= $qty?></sub></i></a>
+            <a href="cart.php" class=""><i class="fa-solid fa-cart-shopping"><sub class="pl-1"><?= $qty?></sub></i></a>
         </div>
     </div>
 </nav>

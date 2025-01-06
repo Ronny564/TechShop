@@ -2,6 +2,7 @@
 require_once "navbar.php";
 require_once "link.php";
 require_once "data.php";
+
 $id=0;
 if(isset($_GET['id']))
 {
@@ -48,17 +49,11 @@ $productbyID= getProductsbyID($pdo,$id);
 
             <div class="mt-6">
               <h3 class="text-xl font-bold text-gray-800">Color: <?=$productbyID['color'] ?></h3>
-              <div class="flex flex-wrap gap-3 mt-4">
-                <button type="button" class="w-10 h-10 bg-black border-2 border-white hover:border-gray-800 rounded-full shrink-0 transition-all"></button>
-                <button type="button" class="w-10 h-10 bg-gray-300 border-2 border-white hover:border-gray-800 rounded-full shrink-0 transition-all"></button>
-                <button type="button" class="w-10 h-10 bg-gray-100 border-2 border-white hover:border-gray-800 rounded-full shrink-0 transition-all"></button>
-                <button type="button" class="w-10 h-10 bg-blue-400 border-2 border-white hover:border-gray-800 rounded-full shrink-0 transition-all"></button>
-              </div>
             </div>
               <div class="flex gap-4 mt-12 max-w-md">
               <button type="button" class="w-full px-4 py-2.5 outline-none border border-blue-600 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded">Buy now</button>
               <input type="hidden" name="id" value="<?=$productbyID['id']?>">
-              <button type="submit" class="w-full px-4 py-2.5 outline-none border border-blue-600 bg-gray-600 hover:bg-gray-400 text-white text-sm font-semibold rounded">Add to cart</button>
+              <button type="submit" name="add" class="w-full px-4 py-2.5 outline-none border border-blue-600 bg-gray-600 hover:bg-gray-400 text-white text-sm font-semibold rounded">Add to cart</button>
             </div>
           </div>
         </form>

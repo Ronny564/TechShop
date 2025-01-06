@@ -1,3 +1,8 @@
+<?php
+require_once "../link.php";
+?>
+
+
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
@@ -26,7 +31,7 @@
 
           <div class="form login">
             <header>Login</header>
-            <form action="checklogin.php" method="POST">
+            <form action="validlogin.php" method="POST">
               <input type="text" placeholder="Email address" name="email"  required />
               <input type="password" placeholder="Password" name="password" required />
               <a href="#">Forgot password?</a>

@@ -36,4 +36,6 @@ if($result){
 else{
     header("Location: /TechShop/customer/login.php?login=failed");
 }
+
+
 ?>
