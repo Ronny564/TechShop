@@ -61,17 +61,19 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         <a href=""><li>About us</li></a>
     </div>
     <div class="nav_right">
-        <!-- <div class="searchBox">
+        <form action="product.php" method="GET">
+        <div class="searchBox">
             <i class="fa-solid fa-magnifying-glass"></i>
             <div class="input_box">
-                <input type="text" placeholder="Search...">
+                <input type="text" name="search" placeholder="Search...">
             </div>
-        </div> -->
+        </div>
+        </form>
        
         <?php if(isset($_SESSION['user'])){?>
         <form method="POST">
             <div class="logout">
-            <a href=""><?=$_SESSION['user']['name']?><i class="fa-solid fa-caret-down ml-2"></i></a>
+            <a href="#"><?=$_SESSION['user']['name']?><i class="fa-solid fa-caret-down ml-2"></i></a>
                 <div class="drop_down">
                     <ul>
                         <li><a href="profiledetail.php">Profile</a></li>

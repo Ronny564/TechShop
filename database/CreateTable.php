@@ -21,10 +21,11 @@ function createProductTable($pdo){
     }
 }
 function createAdminTable($pdo){
-    $query= "Create table if not exists admin
+    $query= "Create table if not exists admins
     (AdminId INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     email TEXT NOT NULL UNIQUE,
+    address TEXT,
     password TEXT NOT NULL
     )";
     try{

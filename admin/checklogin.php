@@ -1,10 +1,8 @@
 <?php
-
 if(!isset($_SESSION)){
     session_start();
 }
 if(!isset($_SESSION['user'])){
-    header("Location: /TechShop/admin/login");
+    header("Location: /TechShop/admin/login/");
 }
-unset($_SESSION);
 ?>

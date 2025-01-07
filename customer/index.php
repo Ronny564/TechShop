@@ -16,7 +16,7 @@ require_once "data.php";
    <div class="main swiper mySwiper">
     <div class="wrapper swiper-wrapper">
       <div class="slide swiper-slide">
-        <img class="image" src="./img/G515_Cinderella_Product_Key_Visual_16x9-D.jpg" alt="">
+        <img class="image" src="../img/G515_Cinderella_Product_Key_Visual_16x9-D.jpg" alt="">
         <div class="image-data">
         <span class="text">
           use the finest product</span>
@@ -28,7 +28,7 @@ require_once "data.php";
         </div>
       </div>
       <div class="slide swiper-slide">
-        <img class="image" src="./img/gaming-keyboards-l19fzyb1tjprgevk.jpg" alt="">
+        <img class="image" src="../img/gaming-keyboards-l19fzyb1tjprgevk.jpg" alt="">
         <div class="image-data">
         <span class="text">use the finest product</span>
           <h2>
@@ -39,7 +39,7 @@ require_once "data.php";
         </div>
       </div>
       <div class="slide swiper-slide">
-        <img class="image" src="img/Mouse.jpg" alt="">
+        <img class="image" src="../img/Mouse.jpg" alt="">
         <div class="image-data">
         <span class="text">use the finest product</span>
           <h2>
@@ -59,7 +59,7 @@ require_once "data.php";
     <div class="cat_container">
       <div class="cat_box">
         <div class="cat_img">
-          <img src="img/apex.png" alt="">
+          <img src="../img/apex.png" alt="">
         </div>
         <div class="cat_text">
           <div class="text_gp">
@@ -71,7 +71,7 @@ require_once "data.php";
       </div>
       <div class="cat_box">
         <div class="cat_img">
-          <img src="img/prox-rapid-hpb-secondary.jpg" alt="">
+          <img src="../img/prox-rapid-hpb-secondary.jpg" alt="">
         </div>
         <div class="cat_text">
           <div class="text_gp">
@@ -83,7 +83,7 @@ require_once "data.php";
       </div>
       <div class="cat_box">
         <div class="cat_img">
-          <img src="img/razersen.jpg" alt="">
+          <img src="../img/razersen.jpg" alt="">
         </div>
         <div class="cat_text">
           <div class="text_gp">
@@ -106,7 +106,7 @@ require_once "data.php";
   <div class="main swiper mySwiper">
     <div class="wrapper swiper-wrapper">
       <div class="slide swiper-slide">
-        <img class="image" src="img/chair.jpg" alt="">
+        <img class="image" src="../img/chair.jpg" alt="">
         <div class="image-data">
         <span class="text">
           sit in comfort and style</span>
@@ -117,7 +117,7 @@ require_once "data.php";
         </div>
       </div>
       <div class="slide swiper-slide">
-        <img class="image" src="img/secrect.webp" alt="">
+        <img class="image" src="../img/secrect.webp" alt="">
         <div class="image-data">
         <span class="text">sit in comfort and style</span>
           <h2>
@@ -127,7 +127,7 @@ require_once "data.php";
         </div>
       </div>
       <div class="slide swiper-slide">
-        <img class="image" src="img/secrectchair.webp" alt="">
+        <img class="image" src="../img/secrectchair.webp" alt="">
         <div class="image-data">
         <span class="text">sit in comfort and style</span>
           <h2>
@@ -145,7 +145,7 @@ require_once "data.php";
     <div class="pro_container">
       <div class="pro_box">
         <div class="pro_img">
-          <img src="img/razer-basilisk-v3-pro.webp" alt="">
+          <img src="../img/razer-basilisk-v3-pro.webp" alt="">
         </div>
         <div class="pro_text">
           <div class="text_pr">
@@ -158,7 +158,7 @@ require_once "data.php";
       </div>
       <div class="pro_box">
         <div class="pro_img">
-          <img src="img/razer-barracuda-x-chroma-homepage-desktop2x.jpg" alt="">
+          <img src="../img/razer-barracuda-x-chroma-homepage-desktop2x.jpg" alt="">
         </div>
         <div class="pro_text">
           <div class="text_pr">

@@ -74,18 +74,21 @@ $admins=[
         "id"=>1,
         "name"=>"Lin",
         "email"=>"lin@gmail.com",
+        "address"=>'Yangon',
         "password"=>'123',
     ],
     [
         "id"=>2,
         "name"=>"Myat",
-        "email"=>'myat@gmail.com',     
+        "email"=>'myat@gmail.com',
+        "address"=>'Yangon',     
         "password"=>'456',
     ],
     [
         "id"=>3,
         "name"=>"Thu",
-        "email"=>'thu@gmail.com',     
+        "email"=>'thu@gmail.com',
+        "address"=>'Yangon',     
         "password"=>'789',
     ]
 ];

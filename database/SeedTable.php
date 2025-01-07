@@ -64,9 +64,10 @@ function seedAdmin($pdo,$admins)
         $id=$admin["id"];
         $name=$admin["name"];
         $email=$admin["email"];
+        $address=$admin["address"];
         $password=$admin["password"];
-        $query="INSERT IGNORE INTO admin VALUES
-        ('$id','$name','$email','$password')";
+        $query="INSERT IGNORE INTO admins VALUES
+        ('$id','$name','$email','$address','$password')";
          try{
             $pdo->query($query);
             
