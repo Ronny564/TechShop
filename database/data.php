@@ -42,7 +42,11 @@ $products=[
         "color"=>"White",
         "category"=>"Mouse",
         "brand"=>"Logitech",
-        "detail"=>"Logitech",
+        "detail"=>"Height: 4.92 in (125 mm)
+        Width: 2.50 in (63.5 mm)
+        Depth: 1.57 in (40 mm)
+        Weight: 2.82 oz (80 g)
+        Cable length: 5.9 ft (1.8 m)",
         "img_url"=>""
     ],
     [

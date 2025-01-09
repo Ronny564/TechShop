@@ -1,6 +1,7 @@
 <?php
 require_once "link.php";
 require_once "navbar.php";
+require_once "data.php";
 if(!isset($_SESSION))
 {
     session_start();
@@ -8,6 +9,8 @@ if(!isset($_SESSION))
 $toral=0;
 $price=0;
 // print_r($_SESSION['cart']);  
+$allProducts =getProduct($pdo);
+
 ?>
 <div class="font-[sans-serif] bg-gradient-to-tr from-gray-200 via-gray-100 to-gray-50">
   <div class="max-w-7xl max-lg:max-w-4xl mx-auto p-6">
@@ -18,6 +21,13 @@ $price=0;
         <?php if(isset($_SESSION['cart'])):?>
         <?php foreach($_SESSION['cart'] as $cart):?>
             <?php
+            $product = null;
+            foreach ($allProducts as $p) {
+                if ($p['id'] == $cart['id']) {
+                    $product = $p;
+                    break;
+                }
+            }
              $price=0;
              $price +=$cart['price']*$cart['qty'];
              global $total;
@@ -26,9 +36,8 @@ $price=0;
         <div class="p-6 bg-white shadow-[0_0px_4px_0px_rgba(6,81,237,0.2)] rounded-md relative">
           <div class="flex items-center max-sm:flex-col gap-4 max-sm:gap-6">
             <div class="w-52 h-52 shrink-0">
-              <img src='https://readymadeui.com/images/laptop2.webp' class="w-full h-full object-contain" />
+              <img src='../img/<?=$product['img_url']?>' class="w-full h-full object-contain" />
             </div>
-
             <div class="sm:border-l sm:pl-4 sm:border-gray-300 w-full">
               <h3 class="text-lg font-bold text-gray-800"><?=$cart['name']?></h3>
               <ul class="mt-4 text-sm space-y-2">

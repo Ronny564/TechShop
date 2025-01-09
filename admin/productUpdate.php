@@ -116,7 +116,6 @@ $product = getProductsbyID($pdo, $id);
                     name="product_img"
                     type="file" 
                     class=" px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
-                    <i class="fa-solid fa-dollar-sign absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
             </div>
                 
