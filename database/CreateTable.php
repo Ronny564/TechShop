@@ -51,15 +51,48 @@ function createCustomerTable(PDO $pdo){
          echo $e->getMessage();}
     
 }
-// function createOrderTable()
-// {
-//     $query= "CREATE TABLE IF NOT EXISTS order
-//     (OrderId INT AUTO INCREMENT,
-//     PRIMARY KEY (OrderId),
-//     FOREIGN KEY (CusID) REFERENCES customers(CusID),
-//     FOREIGN KEY (id) REFERENCES products(id)
-//     )";
-// }
+function createSaleTable($pdo)
+{
+    $query= "CREATE TABLE IF NOT EXISTS sale (
+        SaleId INT AUTO_INCREMENT PRIMARY KEY,
+        CusId INT NOT NULL,
+        order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (CusId) REFERENCES customers(CusId)
+    )";
+    try{
+        $pdo->exec($query);
+        echo "sale table created<br>";
+    }catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+}
+function createSaleDetailTable($pdo)
+{
+    $query="CREATE TABLE IF NOT EXISTS saledetail (
+        SaleDetail_ID INT AUTO_INCREMENT PRIMARY KEY,
+        saleID INT NOT NULL,
+        CusID INT NOT NULL,
+        ProductID INT NOT NULL,
+        Quantity INT NOT NULL,
+        Total_Amount FLOAT,
+        Payment_Method TEXT,
+        Payment_Detail TEXT,
+        FOREIGN KEY (saleID) REFERENCES sale(SaleId),
+        FOREIGN KEY (CusID) REFERENCES customers(CusId),
+        FOREIGN KEY (ProductID) REFERENCES products(id)
+    )";
+    try{
+        $pdo->exec($query);
+        echo "saledetail table created<br>";
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+}
 createProductTable($pdo);
 createAdminTable($pdo);
 createCustomerTable($pdo);
+createSaleTable($pdo);
+createSaleDetailTable($pdo);

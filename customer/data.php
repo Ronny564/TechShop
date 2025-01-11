@@ -55,4 +55,21 @@ function getProductsbyID($pdo,$id)
         echo $e->getMessage();
     }
 }
+function getProductByName($pdo, $search)
+{
+    try {
+        $sql = "SELECT * FROM products WHERE name LIKE :search";
+        $stmt = $pdo->prepare($sql);
+        $search = '%' . $search . '%'; // Use LIKE for partial matches
+        $stmt->bindParam(':search', $search);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all rows
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+
+
+
 

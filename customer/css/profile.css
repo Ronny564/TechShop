@@ -1,0 +1,62 @@
+.container {
+    width: 80%;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+label{
+    color: black;
+}
+td,th{
+    color: black;
+}
+
+h1, h2 {
+    text-align: center;
+    color: black;
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+input{
+    color:black ;
+}
+
+.profile-form {
+    background: rgba(0, 0, 0, 0.148);
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.purchases-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.purchases-table th, .purchases-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.purchases-table th {
+    background-color: rgba(0, 0, 0, 0.29);
+}

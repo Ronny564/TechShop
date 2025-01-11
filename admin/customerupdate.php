@@ -53,18 +53,6 @@ $customer = getCustomersbyID($pdo, $id);
                 </div>
                 <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
             </div>
-            <div class="mb-4">
-                <label for="" class="text-xl">Customer password </label>
-                <div class="relative mt-2">
-                    <input name="password"
-                    type="text" 
-                    value="<?= $customer['password']?>" 
-                    placeholder="Enter Product Brand" 
-                    class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
-                    <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
-                </div>
-                <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
-            </div>
                 
             <div class="mb-4 flex justify-end gap-4">
                 <button class="bg-red-500 px-6 py-2 rounded-md hover:text-gray-300" type="reset">Clear</button>

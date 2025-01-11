@@ -30,8 +30,8 @@ function login($pdo,$email,$password)
 $result = login($pdo,$email, $password);
 session_start();
 if($result){
-    header("Location: index.php");
     $_SESSION['user'] = $result;
+    header("Location: index.php");
 }
 else{
     header("Location: /TechShop/customer/login.php?login=failed");

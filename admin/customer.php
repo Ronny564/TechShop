@@ -55,9 +55,6 @@ if (!empty($searchQuery)) {
                     Address
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Password
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
@@ -76,9 +73,6 @@ if (!empty($searchQuery)) {
                 </td>
                 <td class="px-6 py-4">
                 <?=$customer['address'] ?>
-                </td>
-                <td class="px-6 py-4">
-                <?=$customer['password'] ?>
                 </td>
                 <td class="flex items-center gap-2 p-3">
                     <a href="customerupdate.php?id=<?=$customer['CusId']?>" class="text-black p-4 rounded-full bg-green-600 hover:bg-green-700"><i class="fa-solid fa-pen"></i></a>

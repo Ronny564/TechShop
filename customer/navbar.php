@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         <a href=""><li>About us</li></a>
     </div>
     <div class="nav_right">
-        <form action="product.php" method="GET">
+        <form action="productfilter.php" method="GET">
         <div class="searchBox">
             <i class="fa-solid fa-magnifying-glass"></i>
             <div class="input_box">

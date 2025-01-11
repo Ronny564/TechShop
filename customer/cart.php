@@ -98,8 +98,8 @@ $allProducts =getProduct($pdo);
             Total <span class="ml-auto text-black">$<?=$total?></span>
           </li>
         </ul>
-        <button type="button" class="mt-4 text-sm px-4 py-2.5 tracking-wide w-full bg-blue-600 hover:bg-blue-700 text-white rounded-md">Make Payment</button>
-        <button type="button" class="mt-4 text-sm px-4 py-2.5 tracking-wide w-full bg-gray-900 hover:bg-gray-600 text-white rounded-md">Continue Shopping</button>
+        <a href="checkout.php" type="button" class="text-center mt-4 text-sm px-4 py-2.5 tracking-wide w-full bg-blue-600 hover:bg-blue-700 text-white rounded-md">Check Out</a>
+        <a href="product.php"  type="button" class="text-center mt-4 text-sm px-4 py-2.5 tracking-wide w-full bg-gray-900 hover:bg-gray-600 text-white rounded-md">Continue Shopping</a>
       </div>
     </div>
   </div>
