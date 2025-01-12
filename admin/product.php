@@ -103,7 +103,7 @@ if (!empty($searchQuery)) {
                 <td class="px-6 py-4">
                 <img src="../img/<?=$product['img_url'] ?>" alt="">
                 </td>
-                <td class="flex items-center gap-2 p-3">
+                <td class="flex items-center gap-2 p-3 my-auto">
                     <a href="productUpdate.php?id=<?=$product['id']?>" class="text-black p-4 rounded-full bg-green-600 hover:bg-green-700"><i class="fa-solid fa-pen"></i></a>
                     <form action="productDelete.php" class="mt-3" method="POST">
                     <input type="hidden" value="<?=$product['id']?>" name="id">

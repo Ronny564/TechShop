@@ -108,6 +108,17 @@ require_once "link.php";
                     <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
                 </div>
                 <div class="mb-4">
+                    <label for="" class="text-xl">Product Specification </label>
+                    <div class="relative mt-2">
+                        <input name="product_specification"
+                        type="text" 
+                        placeholder="Enter Product Brand" 
+                        class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
+                        <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
+                    </div>
+                    <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
+                </div>
+                <div class="mb-4">
                     <label for="" class="text-xl">Product Image</label>
                     <div class="relative mt-2">
                         <?php $image = isset($_GET['img_url']) ? $_GET['img_url'] :null?>

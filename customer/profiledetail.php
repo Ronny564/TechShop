@@ -1,86 +1,62 @@
 <?php
-require_once "link.php";
-require_once "navbar.php";
 require_once "../database/PDO.php";
+require_once "navbar.php";
+require_once "link.php";
 
 if (!isset($_SESSION)) {
     session_start();
 }
 
 if (!isset($_SESSION['user'])) {
-    echo "<script>alert('Please log in to view your profile.');</script>";
-    // header("Location: login.php");
-    exit(); // Make sure to call exit after header() to stop further execution
+    header("Location: login.php");
+    exit();
 }
 
-$user = $_SESSION['user'];
-$userId = $user['CusId'];
+$userId = $_SESSION['user']['CusId'];
 $error = "";
+$success = "";
 
-// Fetch user details from the database
-function getUserDetails($pdo, $userId)
-{
-    $stmt = $pdo->prepare("SELECT name, email, password FROM customers WHERE CusId = :CusId");
-    $stmt->execute(['CusId' => $userId]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+// Fetch user details
+$query = "SELECT * FROM customers WHERE CusId = :id";
+$stmt = $pdo->prepare($query);
+$stmt->execute(['id' => $userId]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Fetch recent purchases
-function getRecentPurchases($pdo, $userId)
-{
-    $stmt = $pdo->prepare("
-        SELECT s.order_date, p.name AS product_name, sd.Quantity, sd.Total_Amount 
-        FROM saledetail sd
-        JOIN sale s ON sd.saleID = s.SaleId
-        JOIN products p ON sd.ProductID = p.id
-        WHERE sd.CusID = :CusId
-        ORDER BY s.order_date DESC
-    ");
-    $stmt->execute(['CusId' => $userId]);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-// Handle form submission to update user details
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    if (isset($_POST['update'])) {
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
 
-    // Update user details
-    $stmt = $pdo->prepare("
-        UPDATE customers 
-        SET name = :name, email = :email, password = :password 
-        WHERE CusId = :CusId
-    ");
-    try {
-        $stmt->execute([
-            'name' => $name,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
-            'CusId' => $userId,
-        ]);
+        if (!empty($name) && !empty($email) && !empty($password)) {
+            $hashedPassword = $password;
+            $updateQuery = "UPDATE customers SET name = :name, email = :email, password = :password WHERE CusId = :id";
+            $stmt = $pdo->prepare($updateQuery);
+            $stmt->execute([
+                'name' => $name,
+                'email' => $email,
+                'password' => $hashedPassword,
+                'id' => $userId
+            ]);
 
-        // Update session details
-        $_SESSION['user'] = [
-            'CusId' => $userId,
-            'name' => $name,
-            'email' => $email,
-        ];
-
-        echo "<script>alert('Profile updated successfully!');</script>";
-        header("Location: profiledetail.php");
-        exit();
-    } catch (PDOException $e) {
-        $error = "Error updating profile: " . $e->getMessage();
+            $_SESSION['user']['name'] = $name;
+            $success = "Profile updated successfully!";
+        } else {
+            $error = "All fields are required!";
+        }
     }
 }
 
-// Fetch user details and purchases
-$userDetails = getUserDetails($pdo, $userId);
-$recentPurchases = getRecentPurchases($pdo, $userId);
+// Fetch purchase history with product names
+$historyQuery = "SELECT sale.SaleId, sale.order_date, products.name AS ProductName, saledetail.Quantity, saledetail.Total_Amount 
+                 FROM sale
+                 JOIN saledetail ON sale.SaleId = saledetail.saleID
+                 JOIN products ON saledetail.ProductID = products.id
+                 WHERE sale.CusId = :id";
+$historyStmt = $pdo->prepare($historyQuery);
+$historyStmt->execute(['id' => $userId]);
+$purchaseHistory = $historyStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,59 +64,77 @@ $recentPurchases = getRecentPurchases($pdo, $userId);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Details</title>
-    <link rel="stylesheet" href="./css/profile.css"> 
 </head>
-<body>
-<div class="container">
-    <h1>Profile Details</h1>
+<body class="bg-gray-100 text-gray-800">
 
-    <!-- User Details Section -->
-    <form method="POST" class="profile-form">
-        <h2>Update Profile</h2>
-        <?php if ($error): ?>
-            <p class="error"><?= $error ?></p>
-        <?php endif; ?>
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="<?= $userDetails['name']?>" required>
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-2xl font-bold mb-6 text-black">Profile Details</h2>
+
+    <?php if ($error): ?>
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= $error ?></div>
+    <?php endif; ?>
+
+    <?php if ($success): ?>
+        <div class="bg-green-100 text-green-700 p-3 rounded mb-4"><?= $success ?></div>
+    <?php endif; ?>
+
+    <form method="POST" class="space-y-4">
+        <div>
+            <label for="name" class="block text-sm font-medium">Name</label>
+            <input type="text" id="name" name="name" value="<?= $user['name'] ?>" 
+                   class="w-full mt-1 p-2 border border-gray-300 rounded text-black" required>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?= $userDetails['email']?>" required>
+
+        <div>
+            <label for="email" class="block text-sm font-medium">Email</label>
+            <input type="email" id="email" name="email" value="<?= $user['email'] ?>" 
+                   class="w-full mt-1 p-2 border border-gray-300 rounded text-black" required>
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter new password" required>
+
+        <div>
+            <label for="password" class="block text-sm font-medium">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password" 
+                   class="w-full mt-1 p-2 border border-gray-300 rounded text-black" required>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+
+        <button type="submit" name="update" 
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-black">
+            Update Profile
+        </button>
     </form>
 
-    <!-- Recent Purchases Section -->
-    <h2>Recent Purchases</h2>
-    <?php if ($recentPurchases): ?>
-        <table class="purchases-table">
-            <thead>
+    <h2 class="text-2xl font-bold mt-10 mb-6 text-black">Purchase History</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-300 bg-white rounded-lg shadow-md">
+            <thead class="bg-gray-50 border-b">
                 <tr>
-                    <th>Order Date</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Total Amount</th>
+                    <th class="text-left p-4 text-black">Order ID</th>
+                    <th class="text-left p-4 text-black">Order Date</th>
+                    <th class="text-left p-4 text-black">Product Name</th>
+                    <th class="text-left p-4 text-black">Quantity</th>
+                    <th class="text-left p-4 text-black">Total Amount</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($recentPurchases as $purchase): ?>
+                <?php if (count($purchaseHistory) > 0): ?>
+                    <?php foreach ($purchaseHistory as $history): ?>
+                        <tr class="border-b">
+                            <td class="p-4 text-black"><?= $history['SaleId'] ?></td>
+                            <td class="p-4 text-black"><?= $history['order_date'] ?></td>
+                            <td class="p-4 text-black"><?= $history['ProductName'] ?></td>
+                            <td class="p-4 text-black"><?= $history['Quantity'] ?></td>
+                            <td class="p-4 text-black">$<?= $history['Total_Amount'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
                     <tr>
-                        <td><?= $purchase['order_date'] ?></td>
-                        <td><?= htmlspecialchars($purchase['product_name']) ?></td>
-                        <td><?= $purchase['Quantity'] ?></td>
-                        <td>$<?= number_format($purchase['Total_Amount'], 2) ?></td>
+                        <td colspan="5" class="text-center p-4 text-gray-500">No purchase history found.</td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
-    <?php else: ?>
-        <p>No recent purchases found.</p>
-    <?php endif; ?>
+    </div>
 </div>
+
 </body>
 </html>

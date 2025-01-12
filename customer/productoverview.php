@@ -63,12 +63,26 @@ $productbyID= getProductsbyID($pdo,$id);
 
     <div class="mt-12 shadow-[0_2px_10px_-3px_rgba(169,170,172,0.8)] p-6">
       <h3 class="text-xl font-bold text-gray-800">Product information</h3>
-      <!-- <div>
-     
-        <p class="text-black"><?= $productbyID['details']?></p>
+      <div class="product_spec">
+      <?php
+        // Get the specification text from the database
+        $specificationText = $productbyID['specification'];
+      
+        // Split the paragraph into sentences using regex to capture sentence-ending punctuation (.!?)
+        $sentences = preg_split('/(?<=[.?!])\s+/', $specificationText);
 
-      </div> -->
-        
+        // Check if we have sentences and output them as list items
+        if (!empty($sentences)) {
+          echo '<ul class=" pl-5 ">';
+          foreach ($sentences as $sentence) {
+            // Output each sentence as a list item
+            echo '<li class="text-black list-disc">' . htmlspecialchars($sentence) . '</li>';
+          }
+          echo '</ul>';
+        } else {
+          echo '<p>No specifications available.</p>';
+        }
+      ?>
     </div>
 
   </div>

@@ -13,6 +13,14 @@ if(!isset($_SESSION)){
       $qty += $record['qty'];
     }
   }
+  $wish_qty=0;
+  if(isset($_SESSION['wish']))
+  {
+    foreach($_SESSION['wish']as $rec)
+    {
+        $wish_qty+=$rec['qty'];
+    }
+  }
 
 
 if(isset($_SESSION['user']))
@@ -71,24 +79,28 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         </form>
        
         <?php if(isset($_SESSION['user'])){?>
-        <form method="POST">
+        
             <div class="logout">
             <a href="#"><?=$_SESSION['user']['name']?><i class="fa-solid fa-caret-down ml-2"></i></a>
                 <div class="drop_down">
                     <ul>
                         <li><a href="profiledetail.php">Profile</a></li>
                         <li><a href="">Setting</a></li>
-                        <li><button>Log Out</button></li>
+                        <form method="POST">
+                        <li><button type="submit">Log Out</button></li>
+                        </form>
                     </ul>
                 </div>
             </div>
-        </form>
+        
         <?php }else{?>
             <div class="user">
             <a href="login.php"><i class="fa-solid fa-user"></i></a>
         </div>
         <?php } ?>
-        
+        <div class="cart ml-6 w-14 h-8 rounded-full border-2 border-white flex justify-center items-center pr-1">
+            <a href="wish.php" class=""><i class="fa-solid fa-heart"><sub class="pl-1"><?=$wish_qty?></sub></i></a>
+        </div>
         <div class="cart ml-6 w-14 h-8 rounded-full border-2 border-white flex justify-center items-center pr-1">
             <a href="cart.php" class=""><i class="fa-solid fa-cart-shopping"><sub class="pl-1"><?= $qty?></sub></i></a>
         </div>

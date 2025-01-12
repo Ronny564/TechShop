@@ -24,8 +24,20 @@ if($_SERVER['REQUEST_METHOD']==="POST")
     $img_url = $_FILES['product_img']['name'];
     $target_dir = '../img/';
     $temp_img = $_FILES['product_img']['tmp_name'];
+       // Only move the uploaded file and set img_url if a new file is uploaded
+       if (!empty($img_url)) {
+        move_uploaded_file($temp_img, $target_dir . $img_url);
+    } else {
+        // Retain the existing image URL if no new file is uploaded
+        $stmt = $pdo->prepare("SELECT img_url FROM products WHERE id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $img_url = $stmt->fetchColumn();
+    }
 
-    move_uploaded_file( $temp_img, $target_dir . $img_url );
+    // move_uploaded_file( $temp_img, $target_dir . $img_url );
+
+
 
    
 
@@ -98,5 +110,6 @@ if($_SERVER['REQUEST_METHOD']==="POST")
     else{
         header("Location: ProductUpdate.php?validation=empty");
     }
+    
 
 }

@@ -12,6 +12,7 @@ if($_SERVER['REQUEST_METHOD']==="POST")
     $category=$_POST['product_category'];
     $brand=$_POST['product_brand'];
     $detail=$_POST['product_details'];
+    $specification=$_POST['product_specification'];
 
 
     $img_url = $_FILES['product_img']['name'];
@@ -67,7 +68,7 @@ if($_SERVER['REQUEST_METHOD']==="POST")
     if(!valideFilds($id,$name,$stock,$price,$color,$category,$brand,$detail))
     {
         try{
-            $sql = "INSERT INTO products VALUES('$id','$name','$stock','$price','$color','$category','$brand','$detail','$img_url')";
+            $sql = "INSERT INTO products VALUES('$id','$name','$stock','$price','$color','$category','$brand','$detail','$$specification','$img_url')";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             header("Location: productCreate.php?status=success&img_url=$img_url");

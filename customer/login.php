@@ -36,7 +36,7 @@ require_once "link.php";
             <form action="checklogin.php" method="POST">
               <input type="text" placeholder="Email address" name="email"  required />
               <input type="password" placeholder="Password" name="password" required />
-              <a href="#">Forgot password?</a>
+              <a href="forgetpass.php">Forgot password?</a>
               <input type="submit" value="Login" />
             </form>
             <?php if(isset($_GET["login"])&& $_GET['login']=='failed'): ?>

@@ -158,13 +158,17 @@ function getProductByFilters($pdo, $cat = null, $brand = null, $minPrice = null,
                                                     <h5 class="text-base font-bold text-black text-left"><?= $product['name'] ?></h5>
                                                     <h6 class="text-base text-gray-800 font-bold ml-auto">$<?= $product['price'] ?></h6>
                                                 </div>
+                                                <form action="addtowish.php" method="POST">
                                                 <div class="flex justify-between">
                                                     <div class="flex">
                                                         <p class="text-black text-[15px] mt-2 font-bold">Color:</p>
                                                         <p class="text-black text-[15px] mt-2 ml-2"><?= $product['color'] ?></p>
                                                     </div>
-                                                    <a href="#"><i class="fa-solid fa-heart text-white bg-black p-2 border-black rounded-full"></i></a>
+                                                    <!-- Wishlist -->
+                                                    <input type="hidden" name="id" value="<?=$product['id'] ?>">
+                                                    <button type="submit"><i class="fa-solid fa-heart text-white bg-black p-2 border-black rounded-full"></i></button>
                                                 </div>
+                                                </form>
                                                 <form action="addtocart.php" method="POST" class="mt-3">
                                                     <input type="hidden" name="id" value="<?= $product['id'] ?>">
                                                     <button type="submit" class="text-sm px-2 h-9 font-semibold w-full bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add to cart</button>
@@ -177,21 +181,32 @@ function getProductByFilters($pdo, $cat = null, $brand = null, $minPrice = null,
                                 <?php endif; ?>
                             </div>
                             <!-- Pagination -->
+                            <!-- Pagination -->
                             <div class="flex justify-center mt-48">
                                 <?php if ($totalPages > 1): ?>
                                     <div class="pagination">
+                                        <?php
+                                        // Build the base query string with filters
+                                        $queryParams = $_GET;
+                                        unset($queryParams['page']); // Remove the current 'page' parameter if present
+                                        $baseQueryString = http_build_query($queryParams);
+                                        ?>
+
                                         <?php if ($page > 1): ?>
-                                            <a href="?page=<?= $page - 1 ?>" class="px-4 py-2 bg-blue-600 text-white rounded-md mr-2">Previous</a>
+                                            <a href="?<?= $baseQueryString ?>&page=<?= $page - 1 ?>" class="px-4 py-2 bg-blue-600 text-white rounded-md mr-2">Previous</a>
                                         <?php endif; ?>
+            
                                         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                            <a href="?page=<?= $i ?>" class="px-4 py-2 bg-blue-600 text-white rounded-md mr-2 <?= $i == $page ? 'bg-blue-800' : '' ?>"><?= $i ?></a>
+                                            <a href="?<?= $baseQueryString ?>&page=<?= $i ?>" class="px-4 py-2 bg-blue-600 text-white rounded-md mr-2 <?= $i == $page ? 'bg-blue-800' : '' ?>"><?= $i ?></a>
                                         <?php endfor; ?>
+            
                                         <?php if ($page < $totalPages): ?>
-                                            <a href="?page=<?= $page + 1 ?>" class="px-4 py-2 bg-blue-600 text-white rounded-md">Next</a>
+                                            <a href="?<?= $baseQueryString ?>&page=<?= $page + 1 ?>" class="px-4 py-2 bg-blue-600 text-white rounded-md">Next</a>
                                         <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -200,3 +215,6 @@ function getProductByFilters($pdo, $cat = null, $brand = null, $minPrice = null,
     </section>
 </body>
 </html>
+<?php
+require_once "footer.php";
+?>

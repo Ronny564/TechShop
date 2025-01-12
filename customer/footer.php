@@ -14,10 +14,10 @@ require_once "link.php";
     <div>
       <h4 class="text-lg font-semibold text-white">MAIN MENU</h4>
       <ul class="mt-2">
-        <li class="text-gray-400 hover:text-white mt-4"><a href="">Clothing</a></li>
-        <li class="text-gray-400 hover:text-white mt-4"><a href="">Clothing</a></li>
-        <li class="text-gray-400 hover:text-white mt-4"><a href="">Clothing</a></li>
-        <li class="text-gray-400 hover:text-white mt-4"><a href="">Clothing</a></li>
+        <li class="text-gray-400 hover:text-white mt-4"><a href="">Home</a></li>
+        <li class="text-gray-400 hover:text-white mt-4"><a href="">Products</a></li>
+        <li class="text-gray-400 hover:text-white mt-4"><a href="">Contact</a></li>
+        <li class="text-gray-400 hover:text-white mt-4"><a href="">About Us</a></li>
       </ul>
     </div>
     <div>
@@ -50,8 +50,8 @@ require_once "link.php";
   </div>
   
   <div class="mt-5 text-center">
-    <h3 class="text-xl font-semibold text-white">Sign up now & get 10% off</h3>
-    <p class="text-gray-500">Be the first to know about our new arrivals and exclusive offers.</p>
+    <h3 class="text-xl font-semibold text-white">Recommendation</h3>
+    <p class="text-gray-500">Let us know if u need anything or any recommendation about our website</p>
     <div class="mt-4 flex justify-self-center">
       <input type="email" placeholder="Type your email" class="w-80 rounded-l-md p-2" />
       <button class="text-gray-400 border border-white  rounded-r-md p-2 hover:text-white">SUBSCRIBE</button>
@@ -61,8 +61,6 @@ require_once "link.php";
     <hr class="text-white">
     <p class="text-white text-center">&copy; 2024 TechShop.All right reserved</p>
   </div>
-  
-
 </div>
   </body>
 </html>

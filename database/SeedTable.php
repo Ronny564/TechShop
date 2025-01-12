@@ -13,11 +13,12 @@ function seedProducts($pdo,$products)
         $color =$product["color"];
         $category=$product["category"];
         $brand=$product["brand"];
-        $detail=$product["detail"];
+        $detail = str_replace("'", "\'", $product['detail']);
+        $specification = str_replace("'", "\'", $product['specification']);
         $img_url=$product["img_url"];
         $query= "INSERT IGNORE INTO products VALUES
         (
-            '$id','$name','$stock','$price','$color','$category','$brand','$detail','$img_url' 
+            '$id','$name','$stock','$price','$color','$category','$brand','$detail','$specification','$img_url' 
         )";
         try{
             $pdo->query($query);

@@ -67,7 +67,7 @@ $product = getProductsbyID($pdo, $id);
                     value="<?= $product['color']?>" 
                     placeholder="Enter Product Color" 
                     class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
-                    <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
+                    <i class="fa-solid fa-droplet absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
                 <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
             </div>
@@ -103,7 +103,7 @@ $product = getProductsbyID($pdo, $id);
                     value="<?= $product['details']?>" 
                     placeholder="Enter Product Brand" 
                     class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
-                    <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
+                    <i class="fa-solid fa-circle-info absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
                 <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
             </div>

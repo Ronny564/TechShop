@@ -8,9 +8,6 @@
     font-family: "Inter", serif;
     scroll-behavior: smooth;
 }
-body{
-    height: 3000px;
-}
 .product_show{
     display: flex;
     height: 500px;

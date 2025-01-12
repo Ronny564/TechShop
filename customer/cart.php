@@ -41,11 +41,9 @@ $allProducts =getProduct($pdo);
             <div class="sm:border-l sm:pl-4 sm:border-gray-300 w-full">
               <h3 class="text-lg font-bold text-gray-800"><?=$cart['name']?></h3>
               <ul class="mt-4 text-sm space-y-2">
-                <li class="text-black">AMD Ryzen™ 5 processor</li>
-                <li class="text-black">FreeDOS</li>
-                <li class="text-black">16 GB DDR4 RAM</li>
-                <li class="text-black">512 GB PCIe® NVMe™ SSD Hard Drive</li>
+                <p class="text-black"><?=$cart['details'] ?></p>
               </ul>
+              
 
               <hr class="border-gray-300 my-4" />
 
@@ -95,7 +93,7 @@ $allProducts =getProduct($pdo);
         <h3 class="text-lg font-bold text-gray-800">Order Summary</h3>
         <ul class="text-gray-800 text-sm divide-y mt-4">
           <li class="flex flex-wrap gap-4 py-3 text-black font-bold">
-            Total <span class="ml-auto text-black">$<?=$total?></span>
+            Total <span class="ml-auto text-black">$<?=isset($total)?$total:'No order found'; ?></span>
           </li>
         </ul>
         <a href="checkout.php" type="button" class="text-center mt-4 text-sm px-4 py-2.5 tracking-wide w-full bg-blue-600 hover:bg-blue-700 text-white rounded-md">Check Out</a>

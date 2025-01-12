@@ -10,6 +10,7 @@ function createProductTable($pdo){
     category VARCHAR(255) NOT NULL,
     brand VARCHAR(255) NOT NULL,
     details TEXT,
+    specification TEXT,
     img_url TEXT
     )";
     try{
@@ -91,8 +92,27 @@ function createSaleDetailTable($pdo)
         echo $e->getMessage();
     }
 }
+function createWishlsitTable($pdo)
+{
+    $query="CREATE TABLE IF NOT EXISTS wishlist(
+    wishId INT AUTO_INCREMENT PRIMARY KEY,
+    CusId INT,
+    ProductId INT,
+    FOREIGN KEY (CusId) REFERENCES customers(CusId),
+    FOREIGN KEY (ProductId) REFERENCES products(id)
+    )";
+    try{
+        $pdo->exec($query);
+        echo "wishlist table created<br>";
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+}
 createProductTable($pdo);
 createAdminTable($pdo);
 createCustomerTable($pdo);
 createSaleTable($pdo);
 createSaleDetailTable($pdo);
+createWishlsitTable($pdo);
