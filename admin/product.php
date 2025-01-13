@@ -21,8 +21,14 @@ if (!empty($searchQuery)) {
 
 
 
+<style>
+    body{
+        background-color: #1E1E2F;
+    }
+</style>
 
-
+<body>
+    
 
 <div class="p-4 sm:ml-64">
 <form class="max-w-md mx-auto" method="GET">   
@@ -118,5 +124,5 @@ if (!empty($searchQuery)) {
     </div>
 
 </div>
-
+</body>
 

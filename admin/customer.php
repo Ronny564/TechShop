@@ -19,12 +19,12 @@ if (!empty($searchQuery)) {
     });
 }
 ?>
-
-
-
-
-
-
+<style>
+    body{
+        background-color: #1E1E2F;
+    }
+</style>
+<body>
 <div class="p-4 sm:ml-64">
 <form class="max-w-md mx-auto" method="GET">   
          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -87,5 +87,6 @@ if (!empty($searchQuery)) {
 
 
 </div>
+</body>
 
 
