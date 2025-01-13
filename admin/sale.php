@@ -24,7 +24,6 @@ $sales = $salesStmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 <div class="p-4 sm:ml-64">
-<div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
     <div class="container mx-auto p-6">
         <h1 class="text-2xl font-bold mb-6">Sales Table</h1>
         <table class="table-auto w-full bg-white shadow-md rounded border border-gray-200">
@@ -65,7 +64,7 @@ $sales = $salesStmt->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
-</div>
+
 </div>
 </body>
 </html>

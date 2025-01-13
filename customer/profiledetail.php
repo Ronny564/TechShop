@@ -72,15 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form method="POST" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="text" name="name" value="<?=$user['name']?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="email" name="email" value="<?=$user['email']?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Address</label>
-                    <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="text" name="address" value="<?=$user['address']?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">New Password (leave blank to keep current)</label>
@@ -106,10 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <tbody class="bg-white divide-y divide-gray-200">
                         <?php foreach ($purchases as $purchase): ?>
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($purchase['order_date']); ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($purchase['product_name']); ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($purchase['Quantity']); ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap">$<?php echo htmlspecialchars($purchase['Total_Amount']); ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap"><?=$purchase['order_date']?></td>
+                                <td class="px-6 py-4 whitespace-nowrap"><?=$purchase['product_name'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap"><?=$purchase['Quantity'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap">$<?=$purchase['Total_Amount'] ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

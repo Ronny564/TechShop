@@ -25,7 +25,6 @@ if (!empty($searchQuery)) {
 
 
 <div class="p-4 sm:ml-64">
-<div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
 <form class="max-w-md mx-auto" method="GET">   
      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
      <div class="relative">
@@ -117,7 +116,7 @@ if (!empty($searchQuery)) {
     <div class="flex justify-center mt-4">
         <a href="productCreate.php" class="text-black p-4 w-full bg-blue-600 rounded-lg text-center">Create</a>
     </div>
-</div>
+
 </div>
 
 
