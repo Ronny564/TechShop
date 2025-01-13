@@ -40,10 +40,10 @@ $sales = $salesStmt->fetchAll(PDO::FETCH_ASSOC);
             <tbody>
                 <?php foreach ($sales as $sale): ?>
                     <tr class="border-t">
-                        <td class="px-4 py-2"><?= htmlspecialchars($sale['SaleId']) ?></td>
-                        <td class="px-4 py-2"><?= htmlspecialchars($sale['CustomerName']) ?></td>
-                        <td class="px-4 py-2">$<?= htmlspecialchars(number_format($sale['TotalPrice'], 2)) ?></td>
-                        <td class="px-4 py-2"><?= htmlspecialchars($sale['order_date']) ?></td>
+                        <td class="px-4 py-2"><?= $sale['SaleId']?></td>
+                        <td class="px-4 py-2"><?= $sale['CustomerName'] ?></td>
+                        <td class="px-4 py-2">$<?=$sale['TotalPrice'] ?></td>
+                        <td class="px-4 py-2"><?= $sale['order_date'] ?></td>
                         <td class="flex items-center gap-2 px-4 py-2">
                             <!-- Details Button -->
                             <form method="GET" action="saledetail.php">

@@ -50,12 +50,12 @@ if (isset($_GET['SaleId'])) {
                 <?php if (!empty($details)): ?>
                     <?php foreach ($details as $detail): ?>
                         <tr class="border-t">
-                            <td class="px-4 py-2"><?= htmlspecialchars($detail['SaleDetail_ID']) ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($detail['ProductName']) ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($detail['CustomerName']) ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($detail['Quantity']) ?></td>
-                            <td class="px-4 py-2">$<?= htmlspecialchars(number_format($detail['Total_Amount'], 2)) ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($detail['Payment_Method']) ?></td>
+                            <td class="px-4 py-2"><?= $detail['SaleDetail_ID'] ?></td>
+                            <td class="px-4 py-2"><?= $detail['ProductName'] ?></td>
+                            <td class="px-4 py-2"><?= $detail['CustomerName'] ?></td>
+                            <td class="px-4 py-2"><?= $detail['Quantity'] ?></td>
+                            <td class="px-4 py-2">$<?= $detail['Total_Amount'] ?></td>
+                            <td class="px-4 py-2"><?= $detail['Payment_Method'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

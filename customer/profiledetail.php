@@ -1,61 +1,59 @@
 <?php
+session_start();
 require_once "../database/PDO.php";
-require_once "navbar.php";
-require_once "link.php";
 
-if (!isset($_SESSION)) {
-    session_start();
-}
-
+// Check if the user is logged in
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
 
-$userId = $_SESSION['user']['CusId'];
-$error = "";
-$success = "";
+$user = $_SESSION['user'];
+$CusId = $user['CusId'];
 
-// Fetch user details
-$query = "SELECT * FROM customers WHERE CusId = :id";
-$stmt = $pdo->prepare($query);
-$stmt->execute(['id' => $userId]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+// Fetch recent purchases
+$stmt = $pdo->prepare("
+    SELECT s.SaleId, s.order_date, p.name AS product_name, sd.Quantity, sd.Total_Amount 
+    FROM saledetail sd
+    JOIN sale s ON sd.saleID = s.SaleId
+    JOIN products p ON sd.ProductID = p.id
+    WHERE sd.CusID = :CusId
+    ORDER BY s.order_date DESC
+");
+$stmt->execute(['CusId' => $CusId]);
+$purchases = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['update'])) {
-        $name = trim($_POST['name']);
-        $email = trim($_POST['email']);
-        $password = trim($_POST['password']);
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $password = !empty($_POST['password']) ? $_POST['password'] : $user['password']; // Store password in plain text
 
-        if (!empty($name) && !empty($email) && !empty($password)) {
-            $hashedPassword = $password;
-            $updateQuery = "UPDATE customers SET name = :name, email = :email, password = :password WHERE CusId = :id";
-            $stmt = $pdo->prepare($updateQuery);
-            $stmt->execute([
-                'name' => $name,
-                'email' => $email,
-                'password' => $hashedPassword,
-                'id' => $userId
-            ]);
+    $stmt = $pdo->prepare("
+        UPDATE customers 
+        SET name = :name, email = :email, address = :address, password = :password 
+        WHERE CusId = :CusId
+    ");
+    $stmt->execute([
+        'name' => $name,
+        'email' => $email,
+        'address' => $address,
+        'password' => $password, // Plain text password
+        'CusId' => $CusId
+    ]);
 
-            $_SESSION['user']['name'] = $name;
-            $success = "Profile updated successfully!";
-        } else {
-            $error = "All fields are required!";
-        }
-    }
+    // Update session with new user details
+    $_SESSION['user'] = [
+        'CusId' => $CusId,
+        'name' => $name,
+        'email' => $email,
+        'address' => $address,
+        'password' => $password // Plain text password
+    ];
+
+    echo "<script>alert('Profile updated successfully!');</script>";
 }
-
-// Fetch purchase history with product names
-$historyQuery = "SELECT sale.SaleId, sale.order_date, products.name AS ProductName, saledetail.Quantity, saledetail.Total_Amount 
-                 FROM sale
-                 JOIN saledetail ON sale.SaleId = saledetail.saleID
-                 JOIN products ON saledetail.ProductID = products.id
-                 WHERE sale.CusId = :id";
-$historyStmt = $pdo->prepare($historyQuery);
-$historyStmt->execute(['id' => $userId]);
-$purchaseHistory = $historyStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -64,77 +62,62 @@ $purchaseHistory = $historyStmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 text-gray-800">
-
-<div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-    <h2 class="text-2xl font-bold mb-6 text-black">Profile Details</h2>
-
-    <?php if ($error): ?>
-        <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= $error ?></div>
-    <?php endif; ?>
-
-    <?php if ($success): ?>
-        <div class="bg-green-100 text-green-700 p-3 rounded mb-4"><?= $success ?></div>
-    <?php endif; ?>
-
-    <form method="POST" class="space-y-4">
-        <div>
-            <label for="name" class="block text-sm font-medium">Name</label>
-            <input type="text" id="name" name="name" value="<?= $user['name'] ?>" 
-                   class="w-full mt-1 p-2 border border-gray-300 rounded text-black" required>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Profile Details</h1>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <form method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Address</label>
+                    <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">New Password (leave blank to keep current)</label>
+                    <input type="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Update Profile</button>
+                </div>
+            </form>
         </div>
-
-        <div>
-            <label for="email" class="block text-sm font-medium">Email</label>
-            <input type="email" id="email" name="email" value="<?= $user['email'] ?>" 
-                   class="w-full mt-1 p-2 border border-gray-300 rounded text-black" required>
-        </div>
-
-        <div>
-            <label for="password" class="block text-sm font-medium">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter new password" 
-                   class="w-full mt-1 p-2 border border-gray-300 rounded text-black" required>
-        </div>
-
-        <button type="submit" name="update" 
-                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-black">
-            Update Profile
-        </button>
-    </form>
-
-    <h2 class="text-2xl font-bold mt-10 mb-6 text-black">Purchase History</h2>
-    <div class="overflow-x-auto">
-        <table class="min-w-full border border-gray-300 bg-white rounded-lg shadow-md">
-            <thead class="bg-gray-50 border-b">
-                <tr>
-                    <th class="text-left p-4 text-black">Order ID</th>
-                    <th class="text-left p-4 text-black">Order Date</th>
-                    <th class="text-left p-4 text-black">Product Name</th>
-                    <th class="text-left p-4 text-black">Quantity</th>
-                    <th class="text-left p-4 text-black">Total Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (count($purchaseHistory) > 0): ?>
-                    <?php foreach ($purchaseHistory as $history): ?>
-                        <tr class="border-b">
-                            <td class="p-4 text-black"><?= $history['SaleId'] ?></td>
-                            <td class="p-4 text-black"><?= $history['order_date'] ?></td>
-                            <td class="p-4 text-black"><?= $history['ProductName'] ?></td>
-                            <td class="p-4 text-black"><?= $history['Quantity'] ?></td>
-                            <td class="p-4 text-black">$<?= $history['Total_Amount'] ?></td>
+        <h2 class="text-2xl font-bold mt-8 mb-4">Recent Purchases</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <?php if (count($purchases) > 0): ?>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
                         </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="5" class="text-center p-4 text-gray-500">No purchase history found.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <?php foreach ($purchases as $purchase): ?>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($purchase['order_date']); ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($purchase['product_name']); ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($purchase['Quantity']); ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap">$<?php echo htmlspecialchars($purchase['Total_Amount']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p class="text-gray-600">No recent purchases found.</p>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
-
 </body>
 </html>
