@@ -11,6 +11,7 @@ function logout()
 echo'Logged out';
 if(isset($_SESSION["user"])){
     unset($_SESSION['user']);
+    header("Location: index.php");
 }
 }
 

@@ -24,7 +24,7 @@ require_once "data.php";
             Improve your gaming<br />
             experience
           </h2>
-          <a href="">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+          <a href="product.php">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
         </div>
       </div>
       <div class="slide swiper-slide">
@@ -35,7 +35,7 @@ require_once "data.php";
             Improve your gaming<br />
             experience
           </h2>
-          <a href="">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+          <a href="product.php">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
         </div>
       </div>
       <div class="slide swiper-slide">
@@ -46,7 +46,7 @@ require_once "data.php";
             Improve your gaming<br />
             experience
           </h2>
-          <a href="">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+          <a href="product.php">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@ require_once "data.php";
           <div class="text_gp">
             <h2>APEX PRO TKL GEN 3</h2>
             <p>The World's fastest keyboard just got faster.AGAIN.</p>
-            <a href="">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right pb-8"></i></a>
+            <a href="product.php">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right pb-8"></i></a>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ require_once "data.php";
           <div class="text_gp">
             <h2>PRO X TKL RAPID</h2>
             <p>Tenkeyless Wired Gaming Keyboard with Analog Switches.</p>
-            <a href="">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+            <a href="product.php">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@ require_once "data.php";
           <div class="text_gp">
             <h2>Razer Viper V3 Pro</h2>
             <p>Ultra-lightweight Wireless Symmetrical Esports Mouse.</p>
-            <a href="">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+            <a href="product.php">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
           </div>
         </div>
       </div>
@@ -99,7 +99,7 @@ require_once "data.php";
     <h2>Go from work to play and everything in between</h2>
     <p>Our ergonomic chairs and desks are built to encourage movement for a more healthful routine. Together with ergonomic <br> consultants and experts in biomechanics, physical therapy, and more, we designed Secretlab TITAN Evo to deliver responsive <br> comfort that moves with you across everything you do.</p>
     <div class="chair_pro">
-    <a href="">See all Products</a>
+    <a href="product.php">See all Products</a>
     </div>
     
   </div>
@@ -123,7 +123,7 @@ require_once "data.php";
           <h2>
             Trusted in our award-winning seats.
           </h2>
-          <a href="">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+          <a href="product.php">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
         </div>
       </div>
       <div class="slide swiper-slide">
@@ -133,7 +133,7 @@ require_once "data.php";
           <h2>
             Trusted in our award-winning seats.
           </h2>
-          <a href="">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+          <a href="product.php">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
         </div>
       </div>
     </div>
@@ -151,8 +151,8 @@ require_once "data.php";
           <div class="text_pr">
             <h2>RAZER BASILISK V3 PRO 35K</h2>
             <p>THE APEX OF IMMERSION AND CUSTOMIZATION</p>
-            <a href="">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right mr-8"></i></a>
-            <a href="">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+            <a href="product.php">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right mr-8"></i></a>
+            <a href="product.php">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
           </div>
         </div>
       </div>
@@ -164,8 +164,8 @@ require_once "data.php";
           <div class="text_pr">
             <h2>RAZER BARRACUDA X CHROMA</h2>
             <p>NOW AVAILABLE IN WHITE</p>
-            <a href="">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right mr-8"></i></a>
-            <a href="">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
+            <a href="product.php">Learn More<i class="fa-sharp-duotone fa-solid fa-chevron-right mr-8"></i></a>
+            <a href="product.php">Buy Now<i class="fa-sharp-duotone fa-solid fa-chevron-right"></i></a>
           </div>
         </div>
       </div>

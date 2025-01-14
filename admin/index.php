@@ -1,4 +1,5 @@
 <?php 
+require_once "../database/PDO.php";
 require_once "sidebar.php";
 ?>
 
@@ -9,69 +10,96 @@ require_once "sidebar.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #1E1E2F;
             color: white;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            padding: 20px;
-        }
-        .chart-container {
-            margin: 20px auto;
-            width: 50%;
         }
         h1, h2 {
             text-align: center;
         }
-        canvas {
-            background-color: #2C2C3E;
-            padding: 20px;
-            border-radius: 10px;
-        }
     </style>
 </head>
-<body>
-<div class="p-4 sm:ml-64">
-<div class="container mx-auto p-6">
-    <div class="container">
-        <h1>Admin Dashboard</h1>
+<body class="flex flex-col md:flex-row">
 
-        <div class="chart-container">
-            <h2>Top 10 Most Sold Products</h2>
-            <canvas id="mostSoldChart"></canvas>
-        </div>
-
-        <div class="chart-container">
-            <h2>Top 10 Loyal Customers</h2>
-            <canvas id="topCustomersChart"></canvas>
-        </div>
-
-        <div class="chart-container">
-            <h2>Daily Sales</h2>
-            <canvas id="dailySalesChart"></canvas>
-        </div>
-
-        <div class="chart-container">
-            <h2>Monthly Sales</h2>
-            <canvas id="monthlySalesChart"></canvas>
-        </div>
-
-        <div class="chart-container">
-            <h2>Yearly Sales</h2>
-            <canvas id="yearlySalesChart"></canvas>
-        </div>
-        <div class="chart-container">
-            <h2>Top Categories by Sales</h2>
-            <canvas id="topCategoriesChart"></canvas>
-        </div>
-
+    <!-- Sidebar -->
+    <div class="w-full md:w-1/5 bg-[#1E1E2F] p-4">
+        <?php require_once "sidebar.php" ?>
     </div>
-</div>
-</div>
+
+    <!-- Dashboard -->
+    <div class="w-full md:w-4/5 p-6 bg-[#1E1E2F]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+            <!-- Cards -->
+            <?php
+            $totalSold = 0; $totalRevenue = 0; $totalCustomers = 0;
+
+            // Fetch data from database
+            $totalSoldQuery = $pdo->query("SELECT SUM(Quantity) as totalSold, SUM(Total_Amount) as totalRevenue FROM saledetail");
+            if ($row = $totalSoldQuery->fetch()) {
+                $totalSold = $row['totalSold'];
+                $totalRevenue = $row['totalRevenue'];
+            }
+
+            $totalCustomersQuery = $pdo->query("SELECT COUNT(*) as totalCustomers FROM customers");
+            if ($row = $totalCustomersQuery->fetch()) {
+                $totalCustomers = $row['totalCustomers'];
+            }
+            ?>
+
+            <div class="p-4 bg-[#1E1E2F] border-2 border-white rounded shadow">
+                <h3 class="text-xl font-bold text-white">Total Sold</h3>
+                <p class="text-2xl mt-2 text-white"><?= $totalSold; ?></p>
+            </div>
+            <div class="p-4 bg-[#1E1E2F] border-2 border-white rounded shadow">
+                <h3 class="text-xl font-bold text-white">Total Revenue</h3>
+                <p class="text-2xl mt-2 text-white">$<?= number_format($totalRevenue, 2); ?></p>
+            </div>
+            <div class="p-4 bg-[#1E1E2F] border-2 border-white rounded shadow">
+                <h3 class="text-xl font-bold text-white">Total Customers</h3>
+                <p class="text-2xl mt-2 text-white"><?= $totalCustomers; ?></p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Pie Chart -->
+            <div class="p-6 bg-[#2C2C3E] rounded shadow">
+                <h2 class="text-xl font-semibold mb-4">Top Categories by Sales</h2>
+                <canvas id="topCategoriesChart"></canvas>
+            </div>
+
+            <!-- Bar Chart -->
+            <div class="p-6 bg-[#2C2C3E] rounded shadow">
+                <h2 class="text-xl font-semibold mb-4">Top 10 Most Sold Products</h2>
+                <canvas id="mostSoldChart"></canvas>
+            </div>
+
+            <div class="p-6 bg-[#2C2C3E] rounded shadow">
+                <h2 class="text-xl font-semibold mb-4">Top 10 Loyal Customers</h2>
+                <canvas id="topCustomersChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            <!-- Line Chart -->
+            <div class="p-6 bg-[#2C2C3E] rounded shadow mb-4">
+                <h2 class="text-xl font-semibold mb-4">Daily Sales</h2>
+                <canvas id="dailySalesChart"></canvas>
+            </div>
+
+            <div class="p-6 bg-[#2C2C3E] rounded shadow mb-4">
+                <h2 class="text-xl font-semibold mb-4">Monthly Sales</h2>
+                <canvas id="monthlySalesChart"></canvas>
+            </div>
+
+            <div class="p-6 bg-[#2C2C3E] rounded shadow mb-4">
+                <h2 class="text-xl font-semibold mb-4">Yearly Sales</h2>
+                <canvas id="yearlySalesChart"></canvas>
+            </div>
+        </div>
+    </div>
 
     <script>
         async function fetchData(action) {
@@ -159,6 +187,7 @@ require_once "sidebar.php";
                     }]
                 }
             });
+
             // Top Categories by Sales
             const topCategoriesData = await fetchData('top_categories');
             new Chart(document.getElementById('topCategoriesChart'), {
@@ -178,4 +207,3 @@ require_once "sidebar.php";
     </script>
 </body>
 </html>
-

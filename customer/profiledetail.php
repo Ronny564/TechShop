@@ -65,33 +65,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Profile Details</h1>
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Profile Details</h1>
         
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <form method="POST" class="space-y-4">
+        <!-- Profile Form -->
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Edit Your Profile</h2>
+            <form method="POST" class="space-y-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" name="name" value="<?=$user['name']?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="text" name="name" value="<?=$user['name']?>" 
+                        class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" value="<?=$user['email']?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="email" name="email" value="<?=$user['email']?>" 
+                        class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Address</label>
-                    <input type="text" name="address" value="<?=$user['address']?>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <textarea name="address" rows="3" 
+                        class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500"><?=$user['address']?></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">New Password (leave blank to keep current)</label>
-                    <input type="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <label class="block text-sm font-medium text-gray-700">New Password <span class="text-gray-500">(optional)</span></label>
+                    <input type="password" name="password" 
+                        class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
-                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Update Profile</button>
+                    <button type="submit" 
+                        class="w-full bg-indigo-600 text-white py-3 px-6 rounded-lg font-medium shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Save Changes
+                    </button>
                 </div>
             </form>
         </div>
-        <h2 class="text-2xl font-bold mt-8 mb-4">Recent Purchases</h2>
+
+        <!-- Recent Purchases -->
+        <h2 class="text-2xl font-bold text-gray-800 mt-12 mb-6">Recent Purchases</h2>
         <div class="bg-white p-6 rounded-lg shadow-md">
             <?php if (count($purchases) > 0): ?>
                 <table class="min-w-full divide-y divide-gray-200">
@@ -106,10 +117,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <tbody class="bg-white divide-y divide-gray-200">
                         <?php foreach ($purchases as $purchase): ?>
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap"><?=$purchase['order_date']?></td>
-                                <td class="px-6 py-4 whitespace-nowrap"><?=$purchase['product_name'] ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap"><?=$purchase['Quantity'] ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap">$<?=$purchase['Total_Amount'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?=$purchase['order_date']?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?=$purchase['product_name'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?=$purchase['Quantity'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$<?=$purchase['Total_Amount'] ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

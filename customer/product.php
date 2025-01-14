@@ -158,6 +158,7 @@ function getProductByFilters($pdo, $cat = null, $brand = null, $minPrice = null,
                                                     <h5 class="text-base font-bold text-black text-left"><?= $product['name'] ?></h5>
                                                     <h6 class="text-base text-gray-800 font-bold ml-auto">$<?= $product['price'] ?></h6>
                                                 </div>
+                                                <!-- wishlist -->
                                                 <form action="addtowish.php" method="POST">
                                                 <div class="flex justify-between">
                                                     <div class="flex">

@@ -1,5 +1,6 @@
 <?php
 require_once "link.php";
+require_once "../database/PDO.php";
 
 if(!isset($_SESSION)){
     session_start();
@@ -21,6 +22,16 @@ if(!isset($_SESSION)){
         $wish_qty+=$rec['qty'];
     }
   }
+$wish_qty = 0;
+
+if (isset($_SESSION['user'])) {
+    $userId = $_SESSION['user']['CusId']; // User ID from session
+
+    // Query to get the count of products in the wishlist
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM wishlist WHERE CusId = :CusId");
+    $stmt->execute([':CusId' => $userId]);
+    $wish_qty = $stmt->fetchColumn(); // Get the number of items in the wishlist
+}
 
 
 if(isset($_SESSION['user']))
@@ -32,7 +43,9 @@ function logout()
     if(isset($_SESSION["user"]))
     {
         unset($_SESSION["user"]);
+        unset($_SESSION['cart']);
     }
+    header("Location: index.php");
 }
 if($_SERVER['REQUEST_METHOD'] === "POST"){
     logout();
@@ -56,8 +69,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <div class="dropdown_menu">
         <a href="index.php"><li>Home</li></a>
         <a href="product.php"><li>Products</li></a>
-        <a href=""><li>Contact</li></a>
-        <a href=""><li>About us</li></a>  
+        <a href="contact.php"><li>Contact</li></a>
+        <a href="aboutus.php"><li>About us</li></a>  
     </div>
     <div class="nav_logo">
         <a href="#home">Tech Shop</a>
@@ -65,8 +78,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     <div class="nav_links">
         <a href="index.php"><li>Home</li></a>
         <a href="product.php"><li>Products</li></a>
-        <a href=""><li>Contact</li></a>
-        <a href=""><li>About us</li></a>
+        <a href="contact.php"><li>Contact</li></a>
+        <a href="aboutus.php"><li>About us</li></a>
     </div>
     <div class="nav_right">
         <form action="productfilter.php" method="GET">
@@ -85,7 +98,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                 <div class="drop_down">
                     <ul>
                         <li><a href="profiledetail.php">Profile</a></li>
-                        <li><a href="">Setting</a></li>
+                        <li><a href="#">Setting</a></li>
                         <form method="POST">
                         <li><button type="submit">Log Out</button></li>
                         </form>

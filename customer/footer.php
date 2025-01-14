@@ -10,7 +10,7 @@ require_once "link.php";
   </head>
   <body>
     <div class="bg-black p-8">
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 ml-[60px]">
     <div>
       <h4 class="text-lg font-semibold text-white">MAIN MENU</h4>
       <ul class="mt-2">
@@ -35,7 +35,7 @@ require_once "link.php";
         <li class="text-gray-400 hover:text-white mt-4"><a href="">About Us</a></li>
         <li class="text-gray-400 hover:text-white mt-4"><a href="">Shop</a></li>
         <li class="text-gray-400 hover:text-white mt-4"><a href="">Blog</a></li>
-        <li class="text-gray-400 hover:text-white mt-4"><a href="">Blog</a></li>
+        <li class="text-gray-400 hover:text-white mt-4"><a href="">Contact</a></li>
       </ul>
     </div>
     <div>
@@ -49,17 +49,10 @@ require_once "link.php";
     </div>
   </div>
   
-  <div class="mt-5 text-center">
-    <h3 class="text-xl font-semibold text-white">Recommendation</h3>
-    <p class="text-gray-500">Let us know if u need anything or any recommendation about our website</p>
-    <div class="mt-4 flex justify-self-center">
-      <input type="email" placeholder="Type your email" class="w-80 rounded-l-md p-2" />
-      <button class="text-gray-400 border border-white  rounded-r-md p-2 hover:text-white">SUBSCRIBE</button>
-    </div>
-  </div>
-  <div class="mt-3">
+
+  <div class="mt-3 mb-3">
     <hr class="text-white">
-    <p class="text-white text-center">&copy; 2024 TechShop.All right reserved</p>
+    <p class="text-white text-center mt-3">&copy; 2024 TechShop.All right reserved</p>
   </div>
 </div>
   </body>

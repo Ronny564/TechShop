@@ -85,7 +85,7 @@ $allProducts =getProduct($pdo);
         </div>
         <?php endforeach ?>
         <?php else:?>
-            <h1>No item in your shopping cart</h1>
+            <h1 class="text-black">No item in your shopping cart</h1>
         <?php endif ?>
       </div>
       <!-- Sticky Order Summary -->

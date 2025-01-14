@@ -79,6 +79,7 @@ function seedAdmin($pdo,$admins)
     echo "admin data successfully added<br>";
 }
 
+
 seedCustomers($pdo, $customers);
 seedAdmin($pdo,$admins);
 seedProducts($pdo,$products);

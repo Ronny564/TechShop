@@ -81,12 +81,12 @@ if (!empty($searchQuery)) {
         <tbody>
             <?php foreach ($allProducts as $product) :?>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <?=$product['id'] ?>
-                </th>
-                <th scope="row"">
+                </td>
+                <td scope="row"">
                     <?=$product['name'] ?>
-                </th>
+                </td>
                 <td class="px-6 py-4">
                 <?=$product['stock'] ?>
                 </td>
@@ -106,7 +106,7 @@ if (!empty($searchQuery)) {
                 <?=$product['details'] ?>
                 </td>
                 <td class="px-6 py-4">
-                <img src="../img/<?=$product['img_url'] ?>" alt="">
+                <img src="../img/<?=$product['img_url'] ?>" alt="" class="rounded-lg">
                 </td>
                 <td class="flex items-center gap-2 p-3 my-auto">
                     <a href="productUpdate.php?id=<?=$product['id']?>" class="text-black p-4 rounded-full bg-green-600 hover:bg-green-700"><i class="fa-solid fa-pen"></i></a>

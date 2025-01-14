@@ -2,38 +2,33 @@
 if(!isset($_SESSION)){
     session_start();
 }
-require_once "data.php";
+require_once "../database/PDO.php";
 
+if (isset($_SESSION['user'])) {
+    $userId = $_SESSION['user']['CusId']; // Assuming you store the user's CusId in session
+    $productId = $_POST['id']; // Product ID from the form
 
-if(isset($_POST['id']))
-{
-    $id=$_POST['id'];
-    $productbyID = getProductsbyID($pdo,$id);
-    if(isset($_SESSION['wish'][$id]))
-    {
-        $_SESSION['wish'][$id]['qty']++;
+    try {
+        // Check if the product is already in the user's wishlist
+        $stmt = $pdo->prepare("SELECT * FROM wishlist WHERE CusId = :CusId AND ProductID = :ProductID");
+        $stmt->execute([':CusId' => $userId, ':ProductID' => $productId]);
+
+        if ($stmt->rowCount() == 0) {
+            // Add product to wishlist
+            $stmt = $pdo->prepare("INSERT INTO wishlist (CusId, ProductID) VALUES (:CusId, :ProductID)");
+            $stmt->execute([':CusId' => $userId, ':ProductID' => $productId]);
+            echo "Product added to wishlist!";
+            header("Location: product.php");
+        } else {
+            echo "Product is already in your wishlist!";
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
     }
-    else{
-        $_SESSION['wish'][$id] = [
-            'id' => $productbyID['id'],
-            'name' => $productbyID['name'],
-            'stock' => $productbyID['stock'],
-            'price' => $productbyID['price'],
-            'color'=>$productbyID['color'],
-            'category'=>$productbyID['category'],
-            'brand'=>$productbyID['brand'],
-            'details'=>$productbyID['details'],
-            'img_url' => $productbyID['img_url'],
-            'qty' => 1,
-        ];
-    }
-    print_r($_SESSION['wish']);
-    foreach($_SESSION['wish']as $record)
-    {
-        print_r($record);  
-    }
-    header("Location: product.php");
+} else {
+    echo "You need to be logged in to add products to your wishlist.";
 }
-// unset($_SESSION['wish'])
+
+
 
 ?>
