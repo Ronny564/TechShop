@@ -6,7 +6,23 @@ require_once "../database/PDO.php";
 // Fetch search query
 $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-// Fetch sales data
+// Pagination setup
+$itemsPerPage = 10; // Number of items per page
+$currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($currentPage - 1) * $itemsPerPage;
+
+// Fetch total count of sales for pagination
+$countQuery = "
+    SELECT COUNT(DISTINCT sale.SaleId) AS total
+    FROM sale
+    JOIN customers ON sale.CusId = customers.CusId
+    WHERE customers.name LIKE :searchQuery";
+$countStmt = $pdo->prepare($countQuery);
+$countStmt->execute(['searchQuery' => "%$searchQuery%"]);
+$totalSales = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+$totalPages = ceil($totalSales / $itemsPerPage);
+
+// Fetch sales data with pagination
 $salesQuery = "
     SELECT sale.SaleId, customers.name AS CustomerName, 
            SUM(saledetail.Total_Amount) AS TotalPrice, sale.order_date
@@ -15,10 +31,13 @@ $salesQuery = "
     JOIN saledetail ON sale.SaleId = saledetail.saleID
     WHERE customers.name LIKE :searchQuery
     GROUP BY sale.SaleId, customers.name, sale.order_date
-    ORDER BY sale.order_date DESC";
-
+    ORDER BY sale.order_date DESC
+    LIMIT :offset, :itemsPerPage";
 $salesStmt = $pdo->prepare($salesQuery);
-$salesStmt->execute(['searchQuery' => "%$searchQuery%"]);
+$salesStmt->bindValue(':searchQuery', "%$searchQuery%", PDO::PARAM_STR);
+$salesStmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$salesStmt->bindValue(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
+$salesStmt->execute();
 $sales = $salesStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -34,11 +53,6 @@ $sales = $salesStmt->fetchAll(PDO::FETCH_ASSOC);
     <form class="max-w-md mx-auto mb-4" method="GET">
         <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search by Customer Name</label>
         <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-            </div>
             <input type="search" name="search" id="search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by Customer Name" value="<?= htmlspecialchars($searchQuery) ?>" required />
             <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
         </div>
@@ -70,14 +84,12 @@ $sales = $salesStmt->fetchAll(PDO::FETCH_ASSOC);
                         <?= $sale['order_date'] ?>
                     </td>
                     <td class="flex items-center gap-2 px-6 py-4">
-                        <!-- Details Button -->
                         <form method="GET" action="saledetail.php">
                             <input type="hidden" name="SaleId" value="<?= $sale['SaleId'] ?>">
                             <button type="submit" class="text-white p-2 rounded-full bg-blue-600 hover:bg-blue-700">
                                 Details
                             </button>
                         </form>
-                        <!-- Delete Button -->
                         <form method="POST" action="delete_sale.php">
                             <input type="hidden" name="SaleId" value="<?= $sale['SaleId'] ?>">
                             <button type="submit" class="text-white p-2 rounded-full bg-red-600 hover:bg-red-700">
@@ -89,5 +101,20 @@ $sales = $salesStmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <!-- Pagination Links -->
+    <div class="flex justify-center mt-4">
+        <?php if ($currentPage > 1): ?>
+            <a href="?page=<?= $currentPage - 1 ?>&search=<?= urlencode($searchQuery) ?>" class="px-4 py-2 bg-gray-700 text-white rounded-lg mx-1">Previous</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?page=<?= $i ?>&search=<?= urlencode($searchQuery) ?>" class="px-4 py-2 <?= $i === $currentPage ? 'bg-blue-700' : 'bg-gray-700' ?> text-white rounded-lg mx-1"><?= $i ?></a>
+        <?php endfor; ?>
+
+        <?php if ($currentPage < $totalPages): ?>
+            <a href="?page=<?= $currentPage + 1 ?>&search=<?= urlencode($searchQuery) ?>" class="px-4 py-2 bg-gray-700 text-white rounded-lg mx-1">Next</a>
+        <?php endif; ?>
+    </div>
 </div>
 </body>

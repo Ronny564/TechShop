@@ -22,7 +22,7 @@ require_once "../link.php";
               <input type="text" name="email" placeholder="Email address" required />
               <input type="text" name="address" placeholder="Address" required>
               <input type="password" name="password" placeholder="Password" required />
-              <input type="submit" value="Signup" />
+              <input type="submit" class="bg-white" value="Signup" />
             </form>
             <?php if(isset($_GET["signup"])&& $_GET['signup']=='success'): ?>
             <p class="text-green-600 text-l font-bold">Successfully Signup.Login again</p>

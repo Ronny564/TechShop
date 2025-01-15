@@ -1,6 +1,6 @@
 <?php
 require_once "link.php";
-// require_once "sidebar.php";
+require_once "sidebar.php";
 require_once "../database/PDO.php";
 require_once "data.php";
 
