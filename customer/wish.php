@@ -30,7 +30,7 @@ $wishlistProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body class="bg-gray-100">
 
-    <div class="container mx-auto py-16 px-6">
+    <div class="container mx-auto py-10 px-6">
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Your Wishlist</h1>
 
         <?php if (empty($wishlistProducts)): ?>
@@ -68,3 +68,6 @@ $wishlistProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </body>
 </html>
+<?php 
+require_once "footer.php";
+?>

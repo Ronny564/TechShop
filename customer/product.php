@@ -183,7 +183,7 @@ function getProductByFilters($pdo, $cat = null, $brand = null, $minPrice = null,
                             </div>
                             <!-- Pagination -->
                             <!-- Pagination -->
-                            <div class="flex justify-center mt-48">
+                            <div class="flex justify-center mt-10">
                                 <?php if ($totalPages > 1): ?>
                                     <div class="pagination">
                                         <?php

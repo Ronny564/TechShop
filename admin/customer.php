@@ -38,6 +38,7 @@ $paginatedCustomers = array_slice($allCustomers, $offset, $itemsPerPage);
 
 <body>
 <div class="p-4 sm:ml-64">
+<h1 class="text-2xl font-bold mb-6 text-white">Customers Tables</h1>
     <form class="max-w-md mx-auto" method="GET">
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">

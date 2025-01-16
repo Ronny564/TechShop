@@ -23,7 +23,7 @@ if (isset($_SESSION['cart'])) {
         <form method="POST" action="checkoutaction.php">
         <div class="grid gap-4 sm:grid-cols-2 mt-6">
           <div class="flex items-center">
-            <input type="radio" name="payment_method" value="card" class="w-6 h-6 cursor-pointer" id="card" />
+            <input type="radio" name="payment_method" value="card" class="w-6 h-6 cursor-pointer" id="card" required />
             <label for="card" class="ml-4 flex gap-2 cursor-pointer">
               <img src="https://readymadeui.com/images/visa.webp" class="w-14" alt="Visa" />
               <img src="https://readymadeui.com/images/american-express.webp" class="w-14" alt="American Express" />
@@ -32,7 +32,7 @@ if (isset($_SESSION['cart'])) {
           </div>
 
           <div class="flex items-center">
-            <input type="radio" name="payment_method" value="paypal" class="w-6 h-6 cursor-pointer" id="paypal" />
+            <input type="radio" name="payment_method" value="paypal" class="w-6 h-6 cursor-pointer" id="paypal" required/>
             <label for="paypal" class="ml-4 flex gap-2 cursor-pointer">
               <img src="https://readymadeui.com/images/paypal.webp" class="w-24" alt="PayPal" />
             </label>

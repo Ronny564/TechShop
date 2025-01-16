@@ -25,7 +25,7 @@ $customer = getCustomersbyID($pdo, $id);
                     value="<?=$customer['name']?>" 
                     placeholder="Enter Product Name" 
                     class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
-                    <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
+                    <i class="fa-solid fa-user absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
                 <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
             </div>
@@ -37,7 +37,7 @@ $customer = getCustomersbyID($pdo, $id);
                     value="<?= $customer['email']?>" 
                     placeholder="Enter Product Color" 
                     class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
-                    <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
+                    <i class="fa-solid fa-envelope absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
                 <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
             </div>
@@ -49,7 +49,7 @@ $customer = getCustomersbyID($pdo, $id);
                     value="<?= $customer['address']?>" 
                     placeholder="Enter Product Color" 
                     class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
-                    <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
+                    <i class="fa-solid fa-location-dot absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
                 <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
             </div>

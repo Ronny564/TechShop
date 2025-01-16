@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "navbar.php";
 require_once "../database/PDO.php";
 
 // Check if the user is logged in
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto py-8 px-4">
+    <div class="container mx-auto py-8 px-4 mt-1">
         <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Profile Details</h1>
         
         <!-- Profile Form -->
@@ -132,3 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 </html>
+<?php
+require_once "footer.php";
+?>
