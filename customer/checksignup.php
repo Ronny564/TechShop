@@ -7,14 +7,29 @@ if($_SERVER['REQUEST_METHOD']==='POST')
     $address=$_POST['address'];
     $password=$_POST['password'];
 }
-try{
-    $sql="INSERT INTO customers VALUES ('','$name','$email','$address','$password');";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    header("Location: login.php?signup=success");
-
-}catch(PDOException $e)
+function valideFilds($name,$email,$address,$password)
 {
-    header("Location: login.php?signup=failed");
+    if($name===''||$email===''||$address===''||$password===''){
+        return true;
+    }
+    return false;
 }
+if(!valideFilds($name,$email,$address,$password))
+{
+    try{
+        $sql="INSERT INTO customers VALUES ('','$name','$email','$address','$password');";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        header("Location: login.php?signup=success");
+
+    }catch(PDOException $e)
+    {
+        header("Location: login.php?signup=failed");
+    }
+}
+else{
+    header("Location: login.php?validation=empty");
+}
+
+
 ?>

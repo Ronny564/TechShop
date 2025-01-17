@@ -16,9 +16,10 @@ require_once "link.php";
     <section class="wrapper">
           <div class="form signup">
             <header>Signup</header>
+            <?= isset($_GET['validation'])? '<p class="text-red-500" >Fields must not be empty</p>' :null ?>
             <form action="checksignup.php" method="POST">
               <input type="text" name="name" placeholder="Full name" required />
-              <input type="text" name="email" placeholder="Email address" required />
+              <input type="email" name="email" placeholder="Email address" required />
               <input type="text" name="address" placeholder="Address" required />
               <input type="password" name="password" placeholder="Password" required />
               <input type="submit" value="Signup" />

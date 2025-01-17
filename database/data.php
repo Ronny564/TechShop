@@ -778,5 +778,62 @@ $customers = [
     ],
 ];
 
+// Function to generate random sales data
+function generateSales($numSales) {
+    $sales = [];
+    for ($i = 1; $i <= $numSales; $i++) {
+        $sales[] = [
+            "SaleId" => $i, // Auto-incrementing SaleId
+            "CusId" => rand(1, 20), // Random CusId between 1 and 20
+            "order_date" => generateRandomDate('2023-01-01', '2024-12-31') // Random date between 2023 and 2024
+        ];
+    }
+    return $sales;
+}
+
+// Function to generate random sale details data
+function generateSaleDetails($numDetails, $sales, $products) {
+    $saleDetails = [];
+    $detailId = 1;
+    foreach ($sales as $sale) {
+        $numItems = rand(1, 3); // Random number of items per sale (1 to 5)
+        for ($j = 0; $j < $numItems; $j++) {
+            $product = $products[array_rand($products)]; // Random product
+            $quantity = rand(1, 3); // Random quantity between 1 and 3
+            $totalAmount = $product['price'] * $quantity; // Calculate total amount
+            $saleDetails[] = [
+                "SaleDetail_ID" => $detailId++,
+                "saleID" => $sale['SaleId'],
+                "CusID" => $sale['CusId'],
+                "ProductID" => $product['id'],
+                "Quantity" => $quantity,
+                "Total_Amount" => $totalAmount,
+                "Payment_Method" => (rand(0, 1) ? 'Card' : 'PayPal') // Random payment method
+            ];
+        }
+    }
+    return $saleDetails;
+}
+
+// Helper function to generate a random date between two dates
+function generateRandomDate($startDate, $endDate) {
+    $startTimestamp = strtotime($startDate);
+    $endTimestamp = strtotime($endDate);
+    $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
+    return date('Y-m-d H:i:s', $randomTimestamp);
+}
+
+// Generate 50 sales and corresponding sale details
+$sales = generateSales(50);
+$saleDetails = generateSaleDetails(50, $sales, $products);
+
+// Output the generated data (for testing purposes)
+// echo "<pre>";
+// echo "Sales Data:\n";
+// print_r($sales);
+// echo "Sale Details Data:\n";
+// print_r($saleDetails);
+// echo "</pre>";
+
 
 

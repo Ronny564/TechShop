@@ -39,7 +39,7 @@ $product = getProductsbyID($pdo, $id);
                     value="<?=$product['stock']?>"
                     min="1"
                     step="1"
-                    placeholder="Enter Product Name" class=" px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
+                    placeholder="Enter Stock" class=" px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
                     <i class="fa-solid fa-arrow-trend-up absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
                 <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
@@ -77,7 +77,7 @@ $product = getProductsbyID($pdo, $id);
                     <input name="product_category"
                     type="text" 
                     value="<?= $product['category']?>" 
-                    placeholder="Enter Product Color" 
+                    placeholder="Enter Product Categotry" 
                     class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
                     <i class="fa-solid fa-layer-group absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>
@@ -101,7 +101,19 @@ $product = getProductsbyID($pdo, $id);
                     <input name="product_details"
                     type="text" 
                     value="<?= $product['details']?>" 
-                    placeholder="Enter Product Brand" 
+                    placeholder="Enter Product details" 
+                    class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
+                    <i class="fa-solid fa-circle-info absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
+                </div>
+                <?= isset($_GET['validation'])? '<p class="text-red-500" > Empty fields</p>' :null ?>
+            </div>
+            <div class="mb-4">
+                <label for="" class="text-xl">Product Specification </label>
+                <div class="relative mt-2">
+                    <input name="product_specification"
+                    type="text" 
+                    value="<?= $product['specification']?>" 
+                    placeholder="Enter Product specification" 
                     class="px-2 py-2 border border-grey-600 rounded-md w-full pl-9">
                     <i class="fa-solid fa-circle-info absolute left-0 top-1/2 -translate-y-1/2 ml-4"></i>
                 </div>

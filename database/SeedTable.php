@@ -52,12 +52,6 @@ function seedCustomers($pdo,$customers)
     }
     echo "customer data successfully added<br> ";
 }
-
-    
-
-
-
-
 function seedAdmin($pdo,$admins)
 {
     foreach($admins as $admin)
@@ -78,8 +72,50 @@ function seedAdmin($pdo,$admins)
     }
     echo "admin data successfully added<br>";
 }
+function seedSale($pdo, $sales)
+{
+    foreach ($sales as $sale) {
+        $SaleId = $sale["SaleId"];
+        $CusId = $sale["CusId"];
+        $order_date = $sale["order_date"];
+        
+        $query = "INSERT IGNORE INTO sale (SaleId, CusId, order_date) 
+                  VALUES ('$SaleId', '$CusId', '$order_date')";
+        
+        try {
+            $pdo->query($query);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    echo "Sale data successfully added<br>";
+}
 
+function seedSaleDetail($pdo, $saleDetails)
+{
+    foreach ($saleDetails as $saleDetail) {
+        $SaleDetail_ID = $saleDetail["SaleDetail_ID"];
+        $saleID = $saleDetail["saleID"];
+        $CusID = $saleDetail["CusID"];
+        $ProductID = $saleDetail["ProductID"];
+        $Quantity = $saleDetail["Quantity"];
+        $Total_Amount = $saleDetail["Total_Amount"];
+        $Payment_Method = $saleDetail["Payment_Method"];
+        
+        $query = "INSERT IGNORE INTO saledetail (SaleDetail_ID, saleID, CusID, ProductID, Quantity, Total_Amount, Payment_Method) 
+                  VALUES ('$SaleDetail_ID', '$saleID', '$CusID', '$ProductID', '$Quantity', '$Total_Amount', '$Payment_Method')";
+        
+        try {
+            $pdo->query($query);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    echo "Sale Detail data successfully added<br>";
+}
 
+seedSale($pdo,$sales);
+seedSaleDetail($pdo,$saleDetails);
 seedCustomers($pdo, $customers);
 seedAdmin($pdo,$admins);
 seedProducts($pdo,$products);

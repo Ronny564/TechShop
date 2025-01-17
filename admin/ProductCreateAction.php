@@ -24,47 +24,13 @@ if($_SERVER['REQUEST_METHOD']==="POST")
    
 
     function valideFilds($id,$name,$stock,$price,$color,$category,$brand,$detail):bool{
-        if($id==='')
+        if($id==='' ||$name===''||$stock=== ''||$price=== '' ||$color=== ''||$category=== ''||$brand=== ''||$detail=== '')
         {
-            return true;
-        }
-        if($name==='')
-        {
-            // echo'Name is empty';
-            return true;
-        }
-        if($stock=== '')
-        {
-            // echo 'stock is empty';
-            return true;
-        }
-        if($price=== '')
-        {
-            // echo 'price is empty';
-            return true;
-        }
-        if($color=== '')
-        {
-            // echo 'price is empty';
-            return true;
-        }
-        if($category=== '')
-        {
-            // echo 'price is empty';
-            return true;
-        }
-        if($brand=== '')
-        {
-            // echo 'price is empty';
-            return true;
-        }
-        if($detail=== '')
-        {
-            // echo 'price is empty';
             return true;
         }
         return false;
     }
+    
     if(!valideFilds($id,$name,$stock,$price,$color,$category,$brand,$detail))
     {
         try{

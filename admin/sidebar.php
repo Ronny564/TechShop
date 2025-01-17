@@ -61,23 +61,17 @@ logout();
                <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
             </a>
          </li>
-         <li>
-            <a href="./login/index.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
-               </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap ">Other</span>
-            </a>
-         </li>
 
 
 
          <?php if(isset($_SESSION['user'])){?>
           <form method="POST" class="">
-            <div class="flex justify-evenly absolute bottom-0 left-0 rounded-lg w-full h-[50px] mb-5">
+            <div class="flex absolute rounded-lg w-full h-[50px] mb-5 bottom-10">
                   <i class="fa-solid fa-user text-white text-2xl mt-1"></i>
-                  <p class="text-white mt-1 text-xl whitespace-nowrap"><?=$_SESSION['user']['name']?></p>
-                  <button  name="logout" class="bg-red-600 rounded-md text-white px-5 ml-10 right-0">LogOut</button>
+                  <p class="text-white mt-1 text-xl whitespace-nowrap mx-4"><?=$_SESSION['user']['name']?></p>
+            </div>
+            <div class="absolute bottom-7">
+            <button  name="logout" class="bg-red-600 rounded-md text-white p-2 right-0">LogOut</button>
             </div>
           </form>
           <?php }else{?>

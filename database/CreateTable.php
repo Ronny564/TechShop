@@ -78,7 +78,6 @@ function createSaleDetailTable($pdo)
         Quantity INT NOT NULL,
         Total_Amount FLOAT,
         Payment_Method TEXT,
-        Payment_Detail TEXT,
         FOREIGN KEY (saleID) REFERENCES sale(SaleId),
         FOREIGN KEY (CusID) REFERENCES customers(CusId),
         FOREIGN KEY (ProductID) REFERENCES products(id)
