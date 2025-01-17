@@ -17,16 +17,6 @@ require_once "link.php";
         <p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
             Our mission is simple: to provide you with only the finest in gaming technology, ensuring that every gamer feels at home with equipment that performs as well as it looks.
         </p>
-        <div class="flex justify-center gap-12">
-            <a href="product.php" class="bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
-                Explore Our Collection
-            </a>
-            <a href="contact.php" class="text-white border-2 border-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 hover:text-gray-900  hover:border-gray-900 transition duration-300 ease-in-out">
-                Get In Touch
-            </a>
-
-
-        </div>
     </div>
 </section>
 
