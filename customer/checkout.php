@@ -40,27 +40,35 @@ if (isset($_SESSION['cart'])) {
         </div>
 
         <div class="mt-10">
+          <div id="cardFields">
           <div class="grid sm:col-span-2 sm:grid-cols-2 gap-4">
-            <div>
-              <input type="text" placeholder="Name of card holder"
-                class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
+              <div>
+                <input type="text" placeholder="Name of card holder"
+                  class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
+              </div>
+              <div>
+                <input type="number" placeholder="Postal code"
+                  class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
+              </div>
+              <div>
+                <input type="number" placeholder="Card number"
+                  class="col-span-full px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
+              </div>
+              <div>
+                <input type="number" placeholder="EXP."
+                  class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
+              </div>
+              <div>
+                <input type="number" placeholder="CVV"
+                  class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
+              </div>
             </div>
-            <div>
-              <input type="number" placeholder="Postal code"
-                class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
-            </div>
-            <div>
-              <input type="number" placeholder="Card number"
-                class="col-span-full px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
-            </div>
-            <div>
-              <input type="number" placeholder="EXP."
-                class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
-            </div>
-            <div>
-              <input type="number" placeholder="CVV"
-                class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
-            </div>
+          </div>
+          
+
+          <div id="paypalEmailField" style="display: none;">
+            <input type="email" placeholder="PayPal Email"
+              class="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none shadow-sm hover:ring-2 hover:ring-blue-300 transition duration-200" />
           </div>
 
           <div class="flex flex-wrap gap-4 mt-8">
@@ -82,3 +90,26 @@ if (isset($_SESSION['cart'])) {
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const cardRadio = document.getElementById('card');
+  const paypalRadio = document.getElementById('paypal');
+  const cardFields = document.getElementById('cardFields');
+  const paypalEmailField = document.getElementById('paypalEmailField');
+
+  cardRadio.addEventListener('change', function() {
+    if (cardRadio.checked) {
+      cardFields.style.display = 'block';
+      paypalEmailField.style.display = 'none';
+    }
+  });
+
+  paypalRadio.addEventListener('change', function() {
+    if (paypalRadio.checked) {
+      cardFields.style.display = 'none';
+      paypalEmailField.style.display = 'block';
+    }
+  });
+});
+</script>
