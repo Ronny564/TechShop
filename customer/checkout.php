@@ -23,7 +23,7 @@ if (isset($_SESSION['cart'])) {
         <form method="POST" action="checkoutaction.php">
         <div class="grid gap-4 sm:grid-cols-2 mt-6">
           <div class="flex items-center">
-            <input type="radio" name="payment_method" value="card" class="w-6 h-6 cursor-pointer" id="card" required />
+            <input type="radio" name="payment_method" value="card" class="w-6 h-6 cursor-pointer" id="card" required checked/>
             <label for="card" class="ml-4 flex gap-2 cursor-pointer">
               <img src="https://readymadeui.com/images/visa.webp" class="w-14" alt="Visa" />
               <img src="https://readymadeui.com/images/american-express.webp" class="w-14" alt="American Express" />

@@ -1,16 +1,13 @@
 <?php
-session_start();
 require_once "navbar.php";
 require_once "../database/PDO.php";
 
-// Check if the user is logged in
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
 
-$user = $_SESSION['user'];
-$CusId = $user['CusId'];
+$CusId = $_SESSION['user']['CusId'];
 
 // Fetch recent purchases
 $stmt = $pdo->prepare("
@@ -24,37 +21,52 @@ $stmt = $pdo->prepare("
 $stmt->execute(['CusId' => $CusId]);
 $purchases = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+function getUserData($pdo, $userId) {
+    $query = "SELECT * FROM customers WHERE CusId = :userId";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute(['userId' => $userId]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function updateUserData($pdo, $userId, $name, $email, $address, $password = null) {
+    if ($password) {
+        $query = "UPDATE customers SET name = :name, email = :email, address = :address, password = :password WHERE CusId = :userId";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([
+            'name' => $name,
+            'email' => $email,
+            'address' => $address,
+            'password' =>$password,
+            'userId' => $userId
+        ]);
+    } else {
+        $query = "UPDATE customers SET name = :name, email = :email, address = :address WHERE CusId = :userId";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([
+            'name' => $name,
+            'email' => $email,
+            'address' => $address,
+            'userId' => $userId
+        ]);
+    }
+}
+
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userId'])) {
+    $userId = $_POST['userId'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $address = $_POST['address'];
-    $password = !empty($_POST['password']) ? $_POST['password'] : $user['password']; // Store password in plain text
+    $password = $_POST['password'];
 
-    $stmt = $pdo->prepare("
-        UPDATE customers 
-        SET name = :name, email = :email, address = :address, password = :password 
-        WHERE CusId = :CusId
-    ");
-    $stmt->execute([
-        'name' => $name,
-        'email' => $email,
-        'address' => $address,
-        'password' => $password, // Plain text password
-        'CusId' => $CusId
-    ]);
-
-    // Update session with new user details
-    $_SESSION['user'] = [
-        'CusId' => $CusId,
-        'name' => $name,
-        'email' => $email,
-        'address' => $address,
-        'password' => $password // Plain text password
-    ];
-
+    updateUserData($pdo, $userId, $name, $email, $address, $password);
     echo "<script>alert('Profile updated successfully!');</script>";
+    // Refresh user data in session
+    $_SESSION['user'] = getUserData($pdo, $userId);
 }
+
+// Fetch user data
+$userData = getUserData($pdo, $CusId);
 ?>
 
 <!DOCTYPE html>
@@ -73,20 +85,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Edit Your Profile</h2>
             <form method="POST" class="space-y-6">
+                <input type="hidden" name="userId" value="<?php echo $userData['CusId']; ?>">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" name="name" value="<?=$user['name']?>" 
+                    <input type="text" name="name" value="<?php echo htmlspecialchars($userData['name']); ?>" 
                         class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" value="<?=$user['email']?>" 
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($userData['email']); ?>" 
                         class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Address</label>
                     <textarea name="address" rows="3" 
-                        class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500"><?=$user['address']?></textarea>
+                        class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:ring-indigo-500 focus:border-indigo-500"><?= htmlspecialchars($userData['address']) ?></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">New Password <span class="text-gray-500">(optional)</span></label>
@@ -118,10 +131,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <tbody class="bg-white divide-y divide-gray-200">
                         <?php foreach ($purchases as $purchase): ?>
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?=$purchase['order_date']?></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?=$purchase['product_name'] ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?=$purchase['Quantity'] ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$<?=$purchase['Total_Amount'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?= $purchase['order_date'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?= $purchase['product_name'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700"><?= $purchase['Quantity'] ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$<?= $purchase['Total_Amount'] ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

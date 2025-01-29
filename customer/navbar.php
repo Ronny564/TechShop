@@ -47,7 +47,7 @@ function logout()
     }
     header("Location: index.php");
 }
-if($_SERVER['REQUEST_METHOD'] === "POST"){
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['logout'])) {
     logout();
 }
 
@@ -100,7 +100,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                         <li><a href="profiledetail.php">Profile</a></li>
                         <li><a href="#">Setting</a></li>
                         <form method="POST">
-                        <li><button type="submit">Log Out</button></li>
+                        <li><button type="submit" name="logout">Log Out</button></li>
                         </form>
                     </ul>
                 </div>
