@@ -31,7 +31,7 @@ $result = login($pdo,$email, $password);
 session_start();
 if($result){
     header("Location: ../");
-    $_SESSION['user'] = $result;
+    $_SESSION['admin'] = $result;
 }
 else{
     header("Location: /TechShop/admin/login?login=failed");

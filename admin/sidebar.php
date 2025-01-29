@@ -1,16 +1,16 @@
 <?php 
 require_once "link.php";
 require_once "checklogin.php";   
-if(isset($_SESSION['user'])){
-    $user = $_SESSION['user'];
+if(isset($_SESSION['admin'])){
+    $user = $_SESSION['admin'];
     // print_r($user);
 };
 
 function logout() 
 {
 echo'Logged out';
-if(isset($_SESSION["user"])){
-    unset($_SESSION['user']);
+if(isset($_SESSION["admin"])){
+    unset($_SESSION['admin']);
     header("Location: index.php");
 }
 }
@@ -64,11 +64,11 @@ logout();
 
 
 
-         <?php if(isset($_SESSION['user'])){?>
+         <?php if(isset($_SESSION['admin'])){?>
           <form method="POST" class="">
             <div class="flex absolute rounded-lg w-full h-[50px] mb-5 bottom-10">
                   <i class="fa-solid fa-user text-white text-2xl mt-1"></i>
-                  <p class="text-white mt-1 text-xl whitespace-nowrap mx-4"><?=$_SESSION['user']['name']?></p>
+                  <p class="text-white mt-1 text-xl whitespace-nowrap mx-4"><?=$_SESSION['admin']['name']?></p>
             </div>
             <div class="absolute bottom-7">
             <button  name="logout" class="bg-red-600 rounded-md text-white p-2 right-0">LogOut</button>
