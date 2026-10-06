@@ -1,8 +1,9 @@
 <?php
-if(!isset($_SESSION)){
+if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-if(!isset($_SESSION['admin'])){
-    header("Location: /TechShop/admin/login/");
+
+if (!isset($_SESSION["admin"])) {
+    header("Location: login/index.php");
+    exit;
 }
-?>

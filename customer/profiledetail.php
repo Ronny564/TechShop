@@ -1,11 +1,13 @@
 <?php
-require_once "navbar.php";
-require_once "../database/PDO.php";
-
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
-    exit();
+    exit;
 }
+require_once "navbar.php";
+require_once "../database/PDO.php";
 
 $CusId = $_SESSION['user']['CusId'];
 

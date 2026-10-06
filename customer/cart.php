@@ -2,12 +2,9 @@
 require_once "link.php";
 require_once "navbar.php";
 require_once "data.php";
-if(!isset($_SESSION))
-{
-    session_start();
-}
-$toral=0;
-$price=0;
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
+$total = 0;
+$price = 0;
 // print_r($_SESSION['cart']);  
 $allProducts =getProduct($pdo);
 

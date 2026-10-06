@@ -114,8 +114,8 @@ function seedSaleDetail($pdo, $saleDetails)
     echo "Sale Detail data successfully added<br>";
 }
 
-seedSale($pdo,$sales);
-seedSaleDetail($pdo,$saleDetails);
 seedCustomers($pdo, $customers);
 seedAdmin($pdo,$admins);
 seedProducts($pdo,$products);
+seedSale($pdo,$sales);
+seedSaleDetail($pdo,$saleDetails);

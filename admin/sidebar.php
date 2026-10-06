@@ -1,23 +1,16 @@
-<?php 
-require_once "link.php";
-require_once "checklogin.php";   
-if(isset($_SESSION['admin'])){
-    $user = $_SESSION['admin'];
-    // print_r($user);
-};
-
-function logout() 
-{
-echo'Logged out';
-if(isset($_SESSION["admin"])){
-    unset($_SESSION['admin']);
-    header("Location: index.php");
-}
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
 }
 
-if($_SERVER['REQUEST_METHOD'] === "POST"){
-logout();
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
+    unset($_SESSION["admin"]);
+    header("Location: login/index.php");
+    exit;
 }
+
+require_once __DIR__ . "/checklogin.php";
+require_once __DIR__ . "/link.php";
 ?>
 
 <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">

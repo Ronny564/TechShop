@@ -2,10 +2,7 @@
 require_once "link.php";
 require_once "navbar.php";
 require_once "data.php";
-if(!isset($_SESSION))
-{
-    session_start();
-}
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 $total = 0; // Initialize total amount
 if (isset($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $cart) {

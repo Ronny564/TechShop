@@ -1,0 +1,33 @@
+services:
+  web:
+    build: .
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-techshop}
+      DB_USER: ${MYSQL_USER:-techshop}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-techshop_local_password}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-techshop}
+      MYSQL_USER: ${MYSQL_USER:-techshop}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-techshop_local_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-local_root_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysql -h localhost -uroot -p\"$$MYSQL_ROOT_PASSWORD\" -e \"SELECT 1\" >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  mysql_data:

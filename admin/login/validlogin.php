@@ -1,39 +1,26 @@
 <?php
 require_once __DIR__ . "/../../database/PDO.php";
 
-if($_SERVER['REQUEST_METHOD']==='POST')
-{
-    $email=$_POST['email'];
-    $password=$_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: index.php");
+    exit;
 }
-function login($pdo,$email,$password)
-{
-    $sql = "SELECT * FROM admins WHERE email=:email AND password=:password";
-    try{
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":email",$email);
-        $stmt->bindParam(":password",$password);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($result){
-            return $result;
-        }
-        return [];
-    
-    }
-    catch(PDOException $e){
-        echo "". $e->getMessage();
-        return [];
-    }
+$email = trim($_POST["email"] ?? "");
+$password = $_POST["password"] ?? "";
+
+$stmt = $pdo->prepare("SELECT * FROM admins WHERE email = :email AND password = :password");
+$stmt->execute([":email" => $email, ":password" => $password]);
+$admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$admin) {
+    header("Location: index.php?login=failed");
+    exit;
 }
-$result = login($pdo,$email, $password);
-session_start();
-if($result){
-    header("Location: ../");
-    $_SESSION['admin'] = $result;
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
 }
-else{
-    header("Location: /TechShop/admin/login?login=failed");
-}
-?>
+$_SESSION["admin"] = $admin;
+header("Location: ../index.php");
+exit;

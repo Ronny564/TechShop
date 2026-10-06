@@ -25,7 +25,7 @@ function createAdminTable($pdo){
     $query= "Create table if not exists admins
     (AdminId INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
-    email TEXT NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     address TEXT,
     password TEXT NOT NULL
     )";
@@ -40,7 +40,7 @@ function createCustomerTable(PDO $pdo){
     $query= "Create table if not exists customers
     (CusId INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
-    email TEXT NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     address TEXT NOT NULL,
     password TEXT NOT NULL
     )";
@@ -107,9 +107,9 @@ function createWishlistTable(PDO $pdo) {
         echo $e->getMessage();
     }
 }
-createWishlistTable($pdo);
 createProductTable($pdo);
 createAdminTable($pdo);
 createCustomerTable($pdo);
 createSaleTable($pdo);
 createSaleDetailTable($pdo);
+createWishlistTable($pdo);

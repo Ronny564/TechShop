@@ -1,8 +1,6 @@
 <?php
 require_once "navbar.php";
-if (!isset($_SESSION)) {
-    session_start();
-}
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 require_once "../database/PDO.php";
 
 if (!isset($_SESSION['user'])) {

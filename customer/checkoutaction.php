@@ -2,9 +2,7 @@
 require_once "link.php";
 require_once "data.php";
 
-if (!isset($_SESSION)) {
-    session_start();
-}
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 if (!isset($_SESSION['user']['CusId'])) {
     echo "Error: You must log in to continue.";
     exit();

@@ -1,56 +1,30 @@
 <?php
-require_once "link.php";
-require_once "../database/PDO.php";
-
-if(!isset($_SESSION)){
+if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-  $qty=0;
-  if(isset($_SESSION['cart']))
-  {
-    foreach($_SESSION['cart'] as $record)
-    {
-      // print_r($record);echo "<br>";
-      $qty += $record['qty'];
-    }
-  }
-  $wish_qty=0;
-  if(isset($_SESSION['wish']))
-  {
-    foreach($_SESSION['wish']as $rec)
-    {
-        $wish_qty+=$rec['qty'];
-    }
-  }
-$wish_qty = 0;
 
-if (isset($_SESSION['user'])) {
-    $userId = $_SESSION['user']['CusId']; // User ID from session
-
-    // Query to get the count of products in the wishlist
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM wishlist WHERE CusId = :CusId");
-    $stmt->execute([':CusId' => $userId]);
-    $wish_qty = $stmt->fetchColumn(); // Get the number of items in the wishlist
-}
-
-
-if(isset($_SESSION['user']))
-{
-    $user =$_SESSION['user'];
-};
-function logout()
-{
-    if(isset($_SESSION["user"]))
-    {
-        unset($_SESSION["user"]);
-        unset($_SESSION['cart']);
-    }
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
+    unset($_SESSION["user"], $_SESSION["cart"]);
     header("Location: index.php");
-}
-if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['logout'])) {
-    logout();
+    exit;
 }
 
+require_once __DIR__ . "/../database/PDO.php";
+
+$qty = 0;
+foreach ($_SESSION["cart"] ?? [] as $record) {
+    $qty += (int) ($record["qty"] ?? 0);
+}
+
+$wish_qty = 0;
+if (isset($_SESSION["user"]["CusId"])) {
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM wishlist WHERE CusId = :CusId");
+    $stmt->execute([":CusId" => $_SESSION["user"]["CusId"]]);
+    $wish_qty = (int) $stmt->fetchColumn();
+    $user = $_SESSION["user"];
+}
+
+require_once __DIR__ . "/link.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
