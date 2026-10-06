@@ -10,4 +10,3 @@
 
 The app uses the Compose service name `db` to reach MySQL. On first startup the web container creates the tables and inserts the sample data from `database/data.php`. The MySQL data lives in the `mysql_data` named volume.
 
-Do not commit `.env`; it is ignored by Git. Before publishing this student demo publicly, review the sample accounts in `database/data.php` because the sample passwords are stored as plain text.
